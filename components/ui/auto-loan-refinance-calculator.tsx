@@ -293,7 +293,7 @@ export function AutoLoanRefinanceCalculator() {
                     showTooltip
                     tooltipContent={(val) => `$${val}`}
                   />
-                  <div className="flex flex-col items-center h-16 justify-start">
+                  <div className="flex flex-col items-center h-20 justify-start">
                     <div className="flex items-center justify-center gap-1 px-3 py-1.5 border-2 border-slate-300 hover:border-slate-400 focus-within:border-slate-600 rounded-lg bg-white/50 transition-colors">
                       <span className="text-xs sm:text-sm font-extrabold text-slate-800">$</span>
                       <input
@@ -305,6 +305,8 @@ export function AutoLoanRefinanceCalculator() {
                       />
                     </div>
                     <Label className="flex flex-col items-center text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
+                      <span>CURRENT</span>
+                      <span>MONTHLY</span>
                       <span>PAYMENT</span>
                     </Label>
                   </div>
@@ -323,7 +325,7 @@ export function AutoLoanRefinanceCalculator() {
                     showTooltip
                     tooltipContent={(val) => `$${val.toLocaleString()}`}
                   />
-                  <div className="flex flex-col items-center h-16 justify-start">
+                  <div className="flex flex-col items-center h-20 justify-start">
                     <div className="flex items-center justify-center gap-1 px-3 py-1.5 border-2 border-slate-300 hover:border-slate-400 focus-within:border-slate-600 rounded-lg bg-white/50 transition-colors">
                       <span className="text-xs sm:text-sm font-extrabold text-slate-800">$</span>
                       <input
@@ -335,6 +337,8 @@ export function AutoLoanRefinanceCalculator() {
                       />
                     </div>
                     <Label className="flex flex-col items-center text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
+                      <span>LOAN</span>
+                      <span>BALANCE</span>
                       <span>REMAINING</span>
                     </Label>
                   </div>
@@ -353,7 +357,7 @@ export function AutoLoanRefinanceCalculator() {
                     showTooltip
                     tooltipContent={(val) => `${val}%`}
                   />
-                  <div className="flex flex-col items-center h-16 justify-start">
+                  <div className="flex flex-col items-center h-20 justify-start">
                     <div className="flex items-center justify-center gap-1 px-3 py-1.5 border-2 border-slate-300 hover:border-slate-400 focus-within:border-slate-600 rounded-lg bg-white/50 transition-colors">
                       <input
                         type="text"
@@ -384,7 +388,7 @@ export function AutoLoanRefinanceCalculator() {
                     showTooltip
                     tooltipContent={(val) => `${val}%`}
                   />
-                  <div className="flex flex-col items-center h-16 justify-start">
+                  <div className="flex flex-col items-center h-20 justify-start">
                     <div className="flex items-center justify-center gap-1 px-3 py-1.5 border-2 border-slate-300 hover:border-slate-400 focus-within:border-slate-600 rounded-lg bg-white/50 transition-colors">
                       <input
                         type="text"
@@ -415,7 +419,7 @@ export function AutoLoanRefinanceCalculator() {
                     showTooltip
                     tooltipContent={(val) => `${val} YRS`}
                   />
-                  <div className="flex flex-col items-center h-16 justify-start">
+                  <div className="flex flex-col items-center h-20 justify-start">
                     <div className="flex items-center justify-center gap-1 px-3 py-1.5 border-2 border-slate-300 hover:border-slate-400 focus-within:border-slate-600 rounded-lg bg-white/50 transition-colors">
                       <input
                         type="text"
@@ -446,7 +450,7 @@ export function AutoLoanRefinanceCalculator() {
                     showTooltip
                     tooltipContent={(val) => `${val} YRS`}
                   />
-                  <div className="flex flex-col items-center h-16 justify-start">
+                  <div className="flex flex-col items-center h-20 justify-start">
                     <div className="flex items-center justify-center gap-1 px-3 py-1.5 border-2 border-slate-300 hover:border-slate-400 focus-within:border-slate-600 rounded-lg bg-white/50 transition-colors">
                       <input
                         type="text"
