@@ -54,9 +54,9 @@ export default function Benefits() {
       <Navigation overlay />
       
       {/* ─── PREMIUM HERO SECTION ─── */}
-      <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden border-b border-white/5">
+      <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center pt-44 border-b border-white/5">
         {/* Abstract Dark Glowing Background */}
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay z-[1]" />
           
           <motion.div 
@@ -71,12 +71,8 @@ export default function Benefits() {
           />
         </div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center text-center mt-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center text-center">
           <motion.div initial="initial" animate="animate" variants={containerVariants} className="max-w-4xl">
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8">
-              <ShieldCheck className="w-4 h-4 text-dpe-blue" />
-              <span className="text-sm font-medium tracking-widest text-gray-300 uppercase">{ts('benefits.hero.badge')}</span>
-            </motion.div>
 
             <motion.h1 variants={itemVariants} className="text-6xl sm:text-7xl md:text-[8rem] text-white mb-8 leading-[0.92]">
               {ts('benefits.hero.titleLine1')} <br />

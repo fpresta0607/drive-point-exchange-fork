@@ -38,91 +38,96 @@ export default function Footer() {
 
       {/* Main Footer Content */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-0 lg:justify-between lg:items-center">
           {/* Company Info */}
-          <div className="lg:col-span-1">
-            <Link href="/" className="inline-flex items-center rounded-lg bg-white/10 backdrop-blur-sm px-3 py-2 mb-6">
+          <div className="flex flex-row items-center gap-8 shrink-0">
+            <Link href="/" className="inline-flex items-center shrink-0">
               <Image
-                src="/logo.png"
+                src="/logo-no bg-inverted.png"
                 alt="Drive Point Exchange Logo"
-                width={160}
-                height={60}
-                className="h-9 w-auto"
+                width={300}
+                height={110}
+                className="h-24 w-auto"
               />
             </Link>
-            <p className="text-slate-300 mb-6 leading-relaxed text-[15px]">
-              {ts('footer.description')}
-            </p>
-            <div className="flex items-center space-x-2 mb-5">
-              <div className="w-1.5 h-1.5 bg-dpe-blue rounded-full animate-pulse" />
-              <span className="text-sm text-slate-400">{ts('footer.nationwideCoverage')}</span>
+            <div>
+              <p className="text-slate-300 mb-4 leading-relaxed text-[15px] max-w-xs">
+                {ts('footer.description')}
+              </p>
+              <div className="flex items-center space-x-2 mb-3">
+                <div className="w-1.5 h-1.5 bg-dpe-blue rounded-full animate-pulse" />
+                <span className="text-sm text-slate-400">{ts('footer.nationwideCoverage')}</span>
+              </div>
+              <div className="space-y-1">
+                <p className="text-xs font-medium tracking-wider uppercase text-slate-500">Customer Service — 24/7</p>
+                <a
+                  href="tel:+17737821005"
+                  className="text-lg font-semibold text-white hover:text-dpe-blue-light transition-colors"
+                >
+                  (773) 782-1005
+                </a>
+              </div>
             </div>
-            <div className="space-y-1">
-              <p className="text-xs font-medium tracking-wider uppercase text-slate-500">Customer Service — 24/7</p>
-              <a
-                href="tel:+17737821005"
-                className="text-lg font-semibold text-white hover:text-dpe-blue-light transition-colors"
-              >
-                (773) 782-1005
-              </a>
+          </div>
+
+          {/* Links */}
+          <div className="flex flex-col sm:flex-row gap-10 lg:gap-16">
+            {/* Services */}
+            <div>
+              <h3 className="text-xs font-semibold tracking-wider uppercase text-slate-500 mb-5">
+                {ts('footer.ourServices')}
+              </h3>
+              <ul className="space-y-3">
+                {footerLinks.services.map((link, index) => (
+                  <li key={index}>
+                    <Link
+                      href={link.href}
+                      className="text-[15px] text-slate-300 hover:text-white transition-colors duration-200"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
 
-          {/* Services */}
-          <div>
-            <h3 className="text-xs font-semibold tracking-wider uppercase text-slate-500 mb-5">
-              {ts('footer.ourServices')}
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.services.map((link, index) => (
-                <li key={index}>
-                  <Link
-                    href={link.href}
-                    className="text-[15px] text-slate-300 hover:text-white transition-colors duration-200"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+            {/* Calculators */}
+            <div>
+              <h3 className="text-xs font-semibold tracking-wider uppercase text-slate-500 mb-5">
+                {ts('footer.calculators')}
+              </h3>
+              <ul className="space-y-3">
+                {footerLinks.calculators.map((link, index) => (
+                  <li key={index}>
+                    <Link
+                      href={link.href}
+                      className="text-[15px] text-slate-300 hover:text-white transition-colors duration-200"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Calculators */}
-          <div>
-            <h3 className="text-xs font-semibold tracking-wider uppercase text-slate-500 mb-5">
-              {ts('footer.calculators')}
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.calculators.map((link, index) => (
-                <li key={index}>
-                  <Link
-                    href={link.href}
-                    className="text-[15px] text-slate-300 hover:text-white transition-colors duration-200"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company Links */}
-          <div>
-            <h3 className="text-xs font-semibold tracking-wider uppercase text-slate-500 mb-5">
-              {ts('footer.company')}
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link, index) => (
-                <li key={index}>
-                  <Link
-                    href={link.href}
-                    className="text-[15px] text-slate-300 hover:text-white transition-colors duration-200"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            {/* Company Links */}
+            <div>
+              <h3 className="text-xs font-semibold tracking-wider uppercase text-slate-500 mb-5">
+                {ts('footer.company')}
+              </h3>
+              <ul className="space-y-3">
+                {footerLinks.company.map((link, index) => (
+                  <li key={index}>
+                    <Link
+                      href={link.href}
+                      className="text-[15px] text-slate-300 hover:text-white transition-colors duration-200"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>

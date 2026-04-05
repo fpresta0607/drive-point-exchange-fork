@@ -94,10 +94,6 @@ export default function ServicesHub() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center text-center mt-20">
           <motion.div initial="initial" animate="animate" variants={containerVariants} className="max-w-4xl">
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8">
-              <Sparkles className="w-4 h-4 text-dpe-green" />
-              <span className="text-sm font-medium tracking-widest text-gray-300 uppercase">{ts('services.hub.badge')}</span>
-            </motion.div>
 
             <motion.h1 variants={itemVariants} className="text-6xl sm:text-7xl md:text-[8rem] text-white mb-8 leading-[0.92]">
               {ts('services.hub.heroTitle1')} <br />
@@ -172,13 +168,6 @@ export default function ServicesHub() {
                     </AnimatePresence>
                   </div>
 
-                  {/* Action Link */}
-                  <Link 
-                    href={service.href}
-                    className="absolute bottom-8 right-8 w-12 h-12 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 flex items-center justify-center group-hover:bg-dpe-green group-hover:border-transparent group-hover:scale-110 transition-all duration-500"
-                  >
-                     <ArrowUpRight className="w-5 h-5 text-white transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </Link>
                 </div>
               </motion.div>
             ))}

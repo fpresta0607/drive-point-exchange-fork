@@ -54,7 +54,7 @@ function CalculatorContent() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
         </div>
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-24 z-10">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-36 z-10">
           <motion.div
             initial="initial"
             animate="animate"
