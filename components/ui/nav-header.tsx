@@ -83,7 +83,7 @@ function NavHeader({ tabs, isTransparent = false, className }: NavHeaderProps) {
         ref={ulRef}
         className={cn(
           "relative flex items-center p-1",
-"pill-nav-border"
+          "pill-nav-border"
         )}
         onMouseLeave={handleMouseLeave}
       >

@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import Navigation from './Navigation';
+import Footer from './Footer';
 import ShaderBackground from './ui/shader-background';
 import { CTAButton } from './ui/cta-button';
 
@@ -28,12 +29,12 @@ export default function ServiceLayout({ title, description, features, imageSrc }
   const descriptions = Array.isArray(description) ? description : [description];
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden bg-transparent">
+    <div className="min-h-screen flex flex-col bg-transparent">
       <ShaderBackground />
       <Navigation overlay />
 
-      {/* Single-screen centered layout */}
-      <div className="flex-1 flex items-center justify-center px-4 py-4">
+      {/* Centered layout */}
+      <div className="flex-1 flex items-center justify-center px-4 py-4 pt-24">
         <motion.div
           initial="initial"
           animate="animate"
@@ -81,18 +82,17 @@ export default function ServiceLayout({ title, description, features, imageSrc }
                 ))}
               </motion.div>
 
-              <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-3 mt-auto pt-4 border-t border-dpe-blue-800/10">
-                <CTAButton href="/calculator" variant="primary-dark">
-                  Get a Free Quote
-                </CTAButton>
-                <CTAButton href="/contact" variant="primary-dark">
-                  Contact an Expert
+              <motion.div variants={fadeIn} className="flex mt-auto pt-4 border-t border-dpe-blue-800/10">
+                <CTAButton href="/contact" variant="primary-dark" size="lg">
+                  Contact Us
                 </CTAButton>
               </motion.div>
             </div>
           </div>
         </motion.div>
       </div>
+
+      <Footer />
     </div>
   );
 }

@@ -569,7 +569,7 @@ input[type="range"]::-moz-range-thumb {
   /* ─── Overline / label utility ─── */
   .text-overline {
     font-family: var(--font-outfit), 'Outfit', sans-serif;
-    font-size: 0.6875rem;
+    font-size: 0.8125rem;
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;

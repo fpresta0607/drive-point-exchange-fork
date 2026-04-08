@@ -7,8 +7,9 @@ import Navigation from '../../components/Navigation';
 import Footer from '../../components/Footer';
 import { useI18n } from '../../lib/i18n/context';
 import { NebulaBg } from '../../components/ui/nebula-bg';
-import { Sparkles, Shield, TrendingUp, HandCoins, Activity, Landmark } from 'lucide-react';
+import { Sparkles, Shield, TrendingUp, HandCoins, Activity, Landmark, ArrowUpRight } from 'lucide-react';
 import { CTAButton } from '../../components/ui/cta-button';
+import Link from 'next/link';
 
 export default function ServicesHub() {
   const { ts } = useI18n();
@@ -27,7 +28,7 @@ export default function ServicesHub() {
     {
       title: ts('home.services.autoRefinance.title'),
       description: ts('home.services.autoRefinance.description'),
-      icon: <Activity className="w-8 h-8 md:w-12 md:h-12 text-dpe-green group-hover:text-white transition-colors duration-500" />,
+      icon: <Activity className="w-6 h-6 md:w-8 md:h-8 text-dpe-green group-hover:text-white transition-colors duration-500" />,
       image: "/auto/car-loan.jpg",
       href: "/services/auto-refinance",
       category: ts('services.hub.categories.autoRefinance'),
@@ -36,7 +37,7 @@ export default function ServicesHub() {
     {
       title: ts('home.services.vehicleCoverage.title'),
       description: ts('home.services.vehicleCoverage.description'),
-      icon: <Shield className="w-8 h-8 md:w-12 md:h-12 text-dpe-green group-hover:text-white transition-colors duration-500" />,
+      icon: <Shield className="w-6 h-6 md:w-8 md:h-8 text-dpe-green group-hover:text-white transition-colors duration-500" />,
       image: "/auto/porsche-garage.jpg",
       href: "/services/vehicle-coverage",
       category: ts('services.hub.categories.coverage'),
@@ -45,7 +46,7 @@ export default function ServicesHub() {
     {
       title: ts('home.services.homeRefinance.title'),
       description: ts('home.services.homeRefinance.description'),
-      icon: <Landmark className="w-8 h-8 md:w-12 md:h-12 text-dpe-green group-hover:text-white transition-colors duration-500" />,
+      icon: <Landmark className="w-6 h-6 md:w-8 md:h-8 text-dpe-green group-hover:text-white transition-colors duration-500" />,
       image: "/auto/svc-home-refinance.jpg",
       href: "/services/home-refinance",
       category: ts('services.hub.categories.homeLoans'),
@@ -54,7 +55,7 @@ export default function ServicesHub() {
     {
       title: ts('home.services.insuranceConsultation.title'),
       description: ts('home.services.insuranceConsultation.description'),
-      icon: <Sparkles className="w-8 h-8 md:w-12 md:h-12 text-dpe-green group-hover:text-white transition-colors duration-500" />,
+      icon: <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-dpe-green group-hover:text-white transition-colors duration-500" />,
       image: "/auto/svc-auto-insurance.jpg",
       href: "/services/auto-insurance",
       category: ts('services.hub.categories.consulting'),
@@ -63,7 +64,7 @@ export default function ServicesHub() {
     {
       title: ts('home.services.lifeInsurance.title'),
       description: ts('home.services.lifeInsurance.description'),
-      icon: <HandCoins className="w-8 h-8 md:w-12 md:h-12 text-dpe-green group-hover:text-white transition-colors duration-500" />,
+      icon: <HandCoins className="w-6 h-6 md:w-8 md:h-8 text-dpe-green group-hover:text-white transition-colors duration-500" />,
       image: "/auto/svc-life-insurance.jpg",
       href: "/services/life-insurance",
       category: ts('services.hub.categories.consulting'),
@@ -72,7 +73,7 @@ export default function ServicesHub() {
     {
       title: ts('home.services.creditSavings.title'),
       description: ts('home.services.creditSavings.description'),
-      icon: <TrendingUp className="w-8 h-8 md:w-12 md:h-12 text-dpe-green group-hover:text-white transition-colors duration-500" />,
+      icon: <TrendingUp className="w-6 h-6 md:w-8 md:h-8 text-dpe-green group-hover:text-white transition-colors duration-500" />,
       image: "/auto/car-loan3.jpg",
       href: "/services/credit-consultations",
       category: ts('services.hub.categories.financial'),
@@ -85,7 +86,7 @@ export default function ServicesHub() {
       <Navigation overlay />
       
       {/* ─── PREMIUM HERO SECTION ─── */}
-      <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden border-b border-white/5">
+      <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden">
         {/* Nebula Shader Background */}
         <NebulaBg />
 
@@ -123,52 +124,60 @@ export default function ServicesHub() {
               <motion.div
                 key={service.title}
                 variants={itemVariants}
-                className="group w-full h-[400px] relative rounded-[2rem] overflow-hidden"
-                onHoverStart={() => setHoveredIndex(index)}
-                onHoverEnd={() => setHoveredIndex(null)}
               >
-                {/* Background Image that fades in on hover */}
-                <div className="absolute inset-0 w-full h-full">
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    fill
-                    className="object-cover scale-100 group-hover:scale-110 transition-transform duration-[1500ms] ease-out"
-                  />
-                  {/* Glassmorphism Dark Overlay */}
-                  <div className="absolute inset-0 bg-[#050928]/85 group-hover:bg-black/50 transition-colors duration-700 backdrop-blur-[2px] group-hover:backdrop-blur-0" />
-                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-40 bg-gradient-to-tr ${service.accent} mix-blend-overlay transition-opacity duration-700`} />
-                </div>
+                <Link
+                  href={service.href}
+                  className="group block w-full h-[400px] relative rounded-[2rem] overflow-hidden border border-white/[0.08] hover:border-white/20 transition-colors duration-500"
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  {/* Background Image that fades in on hover */}
+                  <div className="absolute inset-0 w-full h-full">
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      className="object-cover scale-100 group-hover:scale-110 transition-transform duration-[1500ms] ease-out"
+                    />
+                    {/* Glassmorphism Dark Overlay */}
+                    <div className="absolute inset-0 bg-[#050928]/85 group-hover:bg-black/50 transition-colors duration-700 backdrop-blur-[2px] group-hover:backdrop-blur-0" />
+                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-40 bg-gradient-to-tr ${service.accent} mix-blend-overlay transition-opacity duration-700`} />
+                  </div>
 
-                {/* Content Container */}
-                <div className="relative h-full flex flex-col p-8 md:p-10 z-10 border border-white/5 rounded-[2rem] group-hover:border-white/20 transition-colors duration-500">
-                  {/* Header row with Icon and Label */}
-                  <div className="flex justify-between items-start mb-auto">
-                    <div className="p-4 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 group-hover:bg-white/20 transition-colors duration-500 group-hover:-translate-y-1 transform">
-                      {service.icon}
+                  {/* Content Container */}
+                  <div className="relative h-full flex flex-col justify-between p-7 md:p-8 z-10">
+                    {/* Header row with Icon and Label */}
+                    <div className="flex justify-between items-start">
+                      <div className="p-3 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 group-hover:bg-white/20 transition-colors duration-500 group-hover:-translate-y-1 transform">
+                        {service.icon}
+                      </div>
+                      <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-white/50 group-hover:text-white/90 transition-colors bg-white/5 px-3 py-1 rounded-full border border-white/5">
+                        {service.category}
+                      </span>
                     </div>
-                    <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-white/50 group-hover:text-white/90 transition-colors bg-white/5 px-3 py-1 rounded-full border border-white/5">
-                      {service.category}
-                    </span>
-                  </div>
 
-                  {/* Body Content */}
-                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 ease-out">
-                    <h3 className="text-2xl md:text-3xl text-white mb-4 drop-shadow-md">
-                      {service.title}
-                    </h3>
-                    <AnimatePresence>
-                      <motion.p 
-                        initial={{ opacity: 0.6, height: 'auto' }}
-                        animate={{ opacity: hoveredIndex === index ? 1 : 0.6 }}
-                        className="text-gray-300/80 text-sm sm:text-base leading-relaxed line-clamp-2 md:line-clamp-3 group-hover:text-white"
-                      >
-                        {service.description}
-                      </motion.p>
-                    </AnimatePresence>
-                  </div>
+                    {/* Body Content */}
+                    <div className="transform translate-y-2 group-hover:translate-y-0 transition-all duration-500 ease-out">
+                      <h3 className="text-2xl md:text-3xl text-white mb-3 drop-shadow-md">
+                        {service.title}
+                      </h3>
+                      <AnimatePresence>
+                        <motion.p
+                          initial={{ opacity: 0.6, height: 'auto' }}
+                          animate={{ opacity: hoveredIndex === index ? 1 : 0.6 }}
+                          className="text-gray-300/80 text-sm sm:text-base leading-relaxed line-clamp-2 md:line-clamp-3 group-hover:text-white"
+                        >
+                          {service.description}
+                        </motion.p>
+                      </AnimatePresence>
+                      <div className="flex items-center gap-2 mt-4 text-white/40 group-hover:text-white/80 transition-colors duration-500">
+                        <span className="tracking-wide uppercase text-xs font-medium">{ts('services.learnMore')}</span>
+                        <ArrowUpRight className="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                      </div>
+                    </div>
 
-                </div>
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </motion.div>
@@ -197,7 +206,7 @@ export default function ServicesHub() {
               </motion.p>
 
               <motion.div variants={itemVariants} className="flex justify-center">
-                <CTAButton href="/contact" size="lg" showArrow>
+                <CTAButton href="/contact" size="lg" showArrow variant="hero">
                   {ts('services.hub.ctaButton')}
                 </CTAButton>
               </motion.div>

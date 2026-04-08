@@ -439,12 +439,9 @@ export default function Home() {
               {ts('home.cta.subtitle')}
             </motion.p>
 
-            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <motion.div variants={fadeInUp} className="flex justify-center mb-12">
               <CTAButton href="/contact" variant="primary">
-                {ts('home.cta.getStarted')}
-              </CTAButton>
-              <CTAButton href="/services" variant="primary">
-                {ts('home.cta.learnMore')}
+                Get in Touch
               </CTAButton>
             </motion.div>
 

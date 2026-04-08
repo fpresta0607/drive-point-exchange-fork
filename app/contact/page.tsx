@@ -114,7 +114,7 @@ export default function Contact() {
       }, 5000);
     } catch (error) {
       console.error('Error sending message:', error);
-      setErrors({ submit: ts('forms.validation.required') });
+      setErrors({ submit: 'Something went wrong. Please try again or call us directly.' });
     } finally {
       setIsSubmitting(false);
     }
@@ -144,7 +144,7 @@ export default function Contact() {
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/auto/loan3.jpg"
+            src="/auto/real-hero-v1.png"
             alt="Contact us for auto financing"
             fill
             sizes="100vw"
@@ -172,17 +172,6 @@ export default function Contact() {
             >
               {ts('contact.subtitle')}
             </motion.p>
-            <motion.div 
-              variants={fadeInUp}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
-              <CTAButton href="/calculator">
-                {ts('contact.calculatePayment')}
-              </CTAButton>
-              <CTAButton href="/services" variant="secondary">
-                {ts('contact.viewServices')}
-              </CTAButton>
-            </motion.div>
           </motion.div>
         </div>
       </section>

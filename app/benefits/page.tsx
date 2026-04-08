@@ -54,7 +54,7 @@ export default function Benefits() {
       <Navigation overlay />
       
       {/* ─── PREMIUM HERO SECTION ─── */}
-      <section className="relative h-[65vh] min-h-[500px] flex items-center justify-center pt-28 border-b border-white/5">
+      <section className="relative h-[65vh] min-h-[500px] flex items-center justify-center pt-28">
         {/* Abstract Dark Glowing Background */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
@@ -84,7 +84,7 @@ export default function Benefits() {
             </motion.p>
 
             <motion.div variants={itemVariants} className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
-              <CTAButton href="/contact" showArrow>
+              <CTAButton href="/contact" showArrow variant="hero">
                 {ts('benefits.hero.getCoverage')}
               </CTAButton>
             </motion.div>
@@ -153,7 +153,7 @@ export default function Benefits() {
               </motion.p>
               
               <motion.div variants={itemVariants} className="flex justify-center gap-6 flex-col sm:flex-row">
-                <CTAButton href="/contact" size="lg">
+                <CTAButton href="/contact" size="lg" variant="hero">
                   {ts('benefits.cta.getCoverage')}
                 </CTAButton>
 

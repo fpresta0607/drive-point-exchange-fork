@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface CTAButtonProps {
-  variant?: "primary" | "primary-dark" | "secondary";
+  variant?: "primary" | "primary-dark" | "secondary" | "hero";
   size?: "default" | "lg";
   href?: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -24,12 +24,14 @@ const variantClasses = {
   primary: "bg-dpe-green text-white",
   "primary-dark": "bg-dpe-navy text-white",
   secondary: "bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20",
+  hero: "bg-white/10 backdrop-blur-sm border border-white/25 hover:bg-white/15 hover:border-white/40 text-white",
 } as const;
 
 const slideColor = {
   primary: "bg-dpe-green/80",
   "primary-dark": "bg-dpe-blue",
   secondary: "",
+  hero: "",
 } as const;
 
 export function CTAButton({
@@ -43,7 +45,7 @@ export function CTAButton({
   type = "button",
   children,
 }: CTAButtonProps) {
-  const hasSlide = variant !== "secondary";
+  const hasSlide = variant !== "secondary" && variant !== "hero";
 
   const inner = (
     <>
@@ -72,10 +74,10 @@ export function CTAButton({
   );
 
   const sharedClasses = cn(
-    "group relative inline-flex items-center justify-center gap-4 font-semibold rounded-full overflow-hidden transition-all hover:scale-[1.02] active:scale-[0.98]",
+    "group relative inline-flex items-center justify-center gap-4 font-semibold rounded-full overflow-hidden transition-all hover:scale-[1.03] active:scale-[0.98]",
     sizeClasses[size],
     variantClasses[variant],
-    hasSlide && "cta-border-pulse",
+    variant === "hero" ? "hero-cta-pulse" : hasSlide && "cta-border-pulse",
     disabled && "opacity-50 cursor-not-allowed hover:scale-100 active:scale-100",
     className
   );

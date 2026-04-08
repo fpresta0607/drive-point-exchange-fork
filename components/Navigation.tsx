@@ -84,8 +84,8 @@ export default function Navigation({ overlay = false }: { overlay?: boolean }) {
 
   return (
     <nav className={`${overlay ? 'fixed' : 'sticky'} top-0 left-0 right-0 z-50 transition-[background-color,box-shadow,border-color] duration-200 ease-out ${isTransparent
-        ? 'bg-gradient-to-b from-black/40 to-transparent border-b border-transparent shadow-none pb-8 -mb-8'
-        : 'bg-white/95 backdrop-blur-xl shadow-md'
+        ? 'bg-gradient-to-b from-black/40 to-transparent border-b-0 shadow-none pb-8 -mb-8'
+        : 'bg-white/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.06)]'
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">

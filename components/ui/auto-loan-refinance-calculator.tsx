@@ -4,10 +4,10 @@ import * as React from "react";
 import { useEffect, useMemo, useState } from "react";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { RotateCcw } from "lucide-react";
+import EmailModal from "@/components/calculator/EmailModal";
 
 type LoanInputs = {
   currentMonthlyPayment: number;
@@ -59,38 +59,10 @@ function parseNumberInput(value: string): number {
   return Number(value.replace(/,/g, ""));
 }
 
-type QuoteForm = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  mobile: string;
-  isAgent: boolean;
-  smsConsent: boolean;
-};
-
-const defaultQuoteForm: QuoteForm = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  mobile: "",
-  isAgent: false,
-  smsConsent: false,
-};
-
 export function AutoLoanRefinanceCalculator() {
   const [values, setValues] = useState<LoanInputs>(defaultValues);
   const [displayValues, setDisplayValues] = useState<Partial<LoanInputs>>({});
   const [showQuoteForm, setShowQuoteForm] = useState(false);
-  const [quoteForm, setQuoteForm] = useState<QuoteForm>(defaultQuoteForm);
-
-  useEffect(() => {
-    if (showQuoteForm) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => { document.body.style.overflow = ''; };
-  }, [showQuoteForm]);
 
   const updateValue = <K extends keyof LoanInputs>(key: K, value: LoanInputs[K]) => {
     setValues((prev) => ({
@@ -155,120 +127,40 @@ export function AutoLoanRefinanceCalculator() {
 
   return (
     <div className="w-full flex flex-col items-center justify-center relative">
-      {/* Quote Form Modal */}
-      {showQuoteForm && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
-          <div
-            className="fixed inset-0 bg-black/50"
-            onClick={() => setShowQuoteForm(false)}
-          />
-          <div className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto p-6 sm:p-8 z-10">
-            {/* Header */}
-            <div className="text-center mb-5">
-              <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-                Get Your FREE Auto Loan Quote
-              </h2>
-              <p className="mt-2 text-sm text-slate-500">
-                Fill out the information below and we will follow up fast with your free no-obligation quote.
-              </p>
-              <p className="mt-1 text-xs text-slate-400">Fields marked with * are required.</p>
-            </div>
-
-            {/* Fields */}
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <Label className="text-xs font-semibold text-slate-700 mb-1 block">First Name *</Label>
-                  <Input
-                    placeholder="First Name"
-                    value={quoteForm.firstName}
-                    onChange={(e) => setQuoteForm((f) => ({ ...f, firstName: e.target.value }))}
-                    className="h-11 rounded-lg border-slate-300 bg-white text-sm"
-                  />
-                </div>
-                <div>
-                  <Label className="text-xs font-semibold text-slate-700 mb-1 block">Last Name *</Label>
-                  <Input
-                    placeholder="Last Name"
-                    value={quoteForm.lastName}
-                    onChange={(e) => setQuoteForm((f) => ({ ...f, lastName: e.target.value }))}
-                    className="h-11 rounded-lg border-slate-300 bg-white text-sm"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <Label className="text-xs font-semibold text-slate-700 mb-1 block">Email Address *</Label>
-                <Input
-                  type="email"
-                  placeholder="Email Address"
-                  value={quoteForm.email}
-                  onChange={(e) => setQuoteForm((f) => ({ ...f, email: e.target.value }))}
-                  className="h-11 rounded-lg border-slate-300 bg-white text-sm"
-                />
-              </div>
-
-              <div>
-                <Label className="text-xs font-semibold text-slate-700 mb-1 block">Mobile Number</Label>
-                <Input
-                  type="tel"
-                  placeholder="Mobile Number (Optional)"
-                  value={quoteForm.mobile}
-                  onChange={(e) => setQuoteForm((f) => ({ ...f, mobile: e.target.value }))}
-                  className="h-11 rounded-lg border-slate-300 bg-white text-sm"
-                />
-              </div>
-
-              <label className="flex items-start gap-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={quoteForm.isAgent}
-                  onChange={(e) => setQuoteForm((f) => ({ ...f, isAgent: e.target.checked }))}
-                  className="mt-0.5 h-4 w-4 rounded border-slate-300 text-dpe-green accent-dpe-green shrink-0"
-                />
-                <span className="text-xs text-slate-600 leading-relaxed">
-                  I am an agent or authorized representative submitting this form on behalf of a client.
-                </span>
-              </label>
-
-              <label className="flex items-start gap-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={quoteForm.smsConsent}
-                  onChange={(e) => setQuoteForm((f) => ({ ...f, smsConsent: e.target.checked }))}
-                  className="mt-0.5 h-4 w-4 rounded border-slate-300 text-dpe-green accent-dpe-green shrink-0"
-                />
-                <span className="text-xs text-slate-500 leading-relaxed">
-                  By checking this box and signing up for texts, you consent to receive Account Notification messages from Drive Point Exchange at the number provided, including messages sent by autodialer. Consent is not a condition of purchase. Msg &amp; data rates may apply. Msg frequency varies. Unsubscribe at any time by replying STOP or clicking the unsubscribe link (where available). Reply HELP for help.{" "}
-                  <a href="/privacy" className="text-dpe-green underline hover:text-green-700">Privacy Policy</a>.
-                </span>
-              </label>
-            </div>
-
-            {/* Actions */}
-            <div className="flex gap-3 mt-6">
-              <button
-                type="button"
-                onClick={() => setShowQuoteForm(false)}
-                className="flex-1 h-11 px-4 rounded-full border border-slate-300 text-slate-600 font-semibold hover:bg-slate-100 transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                className="glow-cta flex-1 h-11 px-4 text-white font-bold text-sm"
-                onClick={() => {
-                  // TODO: submit form
-                  setShowQuoteForm(false);
-                  setQuoteForm(defaultQuoteForm);
-                }}
-              >
-                Get Free Quote
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <EmailModal
+        isOpen={showQuoteForm}
+        onClose={() => setShowQuoteForm(false)}
+        onSubmit={async (data) => {
+          const response = await fetch('/api/email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              type: 'auto_loan_estimate',
+              name: `${data.firstName} ${data.lastName}`,
+              email: data.email,
+              isAgent: data.isAgent,
+              smsConsent: data.smsConsent,
+              promoCode: data.promoCode,
+              inputs: {
+                currentMonthlyPayment: values.currentMonthlyPayment,
+                loanBalanceRemaining: values.loanBalanceRemaining,
+                currentAPR: values.currentAPR,
+                remainingTermYears: values.remainingTermYears,
+                newAPR: values.newAPR,
+                newTermYears: values.newTermYears,
+                mobileNumber: data.mobileNumber || '',
+              },
+              result: {
+                estimatedNewPayment: results.estimatedNewPayment,
+                monthlySavings: results.monthlySavings,
+                interestSavings: results.interestSavings,
+              },
+            }),
+          });
+          if (!response.ok) throw new Error('Failed to send quote request');
+        }}
+        calculatorType="auto"
+      />
 
       <div className="mx-auto w-full max-w-7xl">
         {/* Header Bar */}
