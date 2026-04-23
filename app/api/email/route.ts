@@ -501,21 +501,6 @@ ${emailTranslations.contactForm.followUp}
       );
     }
 
-    // Log SMTP diagnostics only when SMTP is configured (Resend does not use these vars)
-    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
-      const smtpUser = process.env.SMTP_USER.trim();
-      const smtpPass = process.env.SMTP_PASS.trim().replace(/\s+/g, '').replace(/['"]/g, '');
-
-      console.log('SMTP Configuration Check:', {
-        user: smtpUser,
-        hasPassword: !!smtpPass,
-        passwordLength: smtpPass.length,
-        passwordStartsWithSpace: process.env.SMTP_PASS.trim().startsWith(' '),
-        passwordEndsWithSpace: process.env.SMTP_PASS.trim().endsWith(' '),
-        isWorkspaceAccount: smtpUser.includes('@') && !smtpUser.endsWith('@gmail.com'),
-      });
-    }
-
     const refinanceSavingsHighlight = monthlySavings > 0
       ? renderEmailHighlight({
           eyebrow: emailTranslations.refinanceEstimate.savingsTitle,

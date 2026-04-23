@@ -91,15 +91,15 @@ export const SparksCarousel = React.forwardRef<
               <motion.div
                 key={item.id}
                 className="group w-[280px] flex-shrink-0 flex flex-col"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.3, delay: index * 0.04 }}
               >
                 <div 
                   className="overflow-hidden rounded-lg border bg-white text-gray-900 shadow-sm flex flex-col h-full"
                 >
                   <div className="relative overflow-hidden h-[160px] w-full shrink-0">
-                    <div className="w-full h-full transition-transform duration-500 group-hover:scale-105">
+                    <div className="w-full h-full transition-transform duration-200 group-hover:scale-105">
                       <Image
                         alt={item.title}
                         className="object-cover w-full h-full"

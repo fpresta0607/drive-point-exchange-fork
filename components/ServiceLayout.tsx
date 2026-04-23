@@ -22,11 +22,11 @@ export default function ServiceLayout({ title, description, features, imageSrc }
 
   const fadeIn = prefersReducedMotion
     ? { initial: {}, animate: {}, transition: { duration: 0 } }
-    : { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.5 } };
+    : { initial: { opacity: 0, y: 14 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.3 } };
 
   const stagger = prefersReducedMotion
     ? { animate: {} }
-    : { animate: { transition: { staggerChildren: 0.08 } } };
+    : { animate: { transition: { staggerChildren: 0.04 } } };
 
   const descriptions = Array.isArray(description) ? description : [description];
 

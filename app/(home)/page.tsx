@@ -39,9 +39,9 @@ function HeroWordCarousel() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.6 }}
+      transition={{ duration: 0.35, delay: 0.3 }}
       className="flex justify-center"
     >
       <Link
@@ -78,11 +78,11 @@ export default function Home() {
 
   const fadeInUp = prefersReducedMotion
     ? { initial: {}, animate: {}, transition: { duration: 0 } }
-    : { initial: { opacity: 0, y: 40 }, animate: { opacity: 1, y: 0 }, transition: { type: "spring", stiffness: 100, damping: 15 } };
+    : { initial: { opacity: 0, y: 24 }, animate: { opacity: 1, y: 0 }, transition: { type: "spring", stiffness: 260, damping: 20 } };
 
   const staggerChildren = prefersReducedMotion
     ? { animate: {} }
-    : { animate: { transition: { staggerChildren: 0.12 } } };
+    : { animate: { transition: { staggerChildren: 0.05 } } };
 
   const [activeService, setActiveService] = useState(0);
 
@@ -176,7 +176,7 @@ export default function Home() {
               y: ["0%", "1%", "0%"],
             }}
             transition={{
-              duration: 35,
+              duration: 25,
               repeat: Infinity,
               ease: "linear"
             }}
@@ -199,9 +199,9 @@ export default function Home() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 w-full flex flex-col items-center justify-center">
           <div className="w-full max-w-5xl mx-auto text-center">
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
               className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] text-white leading-[1.08] mb-8 font-heading font-extrabold tracking-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]"
             >
               Your Roadmap to{" "}
@@ -212,9 +212,9 @@ export default function Home() {
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.35, delay: 0.2 }}
               className="text-lg md:text-xl text-white/80 font-light max-w-2xl mx-auto mb-10 leading-relaxed"
             >
               Lower your payments, protect your vehicle, and build a stronger financial future - backed by experts who put you first.
@@ -288,10 +288,10 @@ export default function Home() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeService}
-                initial={{ opacity: 0, scale: 1.04 }}
+                initial={{ opacity: 0, scale: 1.02 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.97 }}
-                transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="absolute inset-0"
               >
                 <Image
@@ -311,10 +311,10 @@ export default function Home() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`content-${activeService}`}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.35, ease: 'easeOut', delay: 0.1 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.2, ease: 'easeOut' }}
                 >
                   <span className="inline-flex items-center gap-1.5 text-overline text-dpe-green mb-3">
                     {services[activeService].icon}

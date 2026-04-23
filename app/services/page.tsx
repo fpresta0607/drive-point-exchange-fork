@@ -23,11 +23,11 @@ export default function ServicesHub() {
 
   const containerVariants = prefersReducedMotion
     ? { animate: {} }
-    : { animate: { transition: { staggerChildren: 0.1 } } };
+    : { animate: { transition: { staggerChildren: 0.05 } } };
 
   const itemVariants = prefersReducedMotion
     ? { initial: { opacity: 1, y: 0 }, animate: { opacity: 1, y: 0 } }
-    : { initial: { opacity: 0, y: 30 }, animate: { opacity: 1, y: 0, transition: { duration: 0.8 } } };
+    : { initial: { opacity: 0, y: 16 }, animate: { opacity: 1, y: 0, transition: { duration: 0.35 } } };
 
   const servicesList = [
     {

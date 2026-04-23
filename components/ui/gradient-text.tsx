@@ -37,7 +37,7 @@ function GradientText({
         ],
       }}
       transition={{
-        duration: 3,
+        duration: 4,
         repeat: Infinity,
         ease: "easeInOut",
       }}
