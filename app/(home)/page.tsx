@@ -301,9 +301,8 @@ export default function Home() {
                   sizes="(min-width: 1280px) 1200px, 100vw"
                   className="object-cover"
                 />
-                {/* Dark vignette */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#0A1340]/90 via-[#0A1340]/50 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0A1340]/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0A1340]/70 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A1340]/60 via-transparent to-transparent" />
               </motion.div>
             </AnimatePresence>
 

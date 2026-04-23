@@ -155,6 +155,8 @@ export function AutoLoanRefinanceCalculator() {
       estimatedNewPayment,
       monthlySavings,
       interestSavings,
+      newTotalInterest: newInterest,
+      currentTotalInterestRemaining: currentInterest,
     };
   }, [values]);
 
@@ -180,17 +182,20 @@ export function AutoLoanRefinanceCalculator() {
               promoCode: data.promoCode,
               inputs: {
                 currentMonthlyPayment: values.currentMonthlyPayment,
-                loanBalanceRemaining: values.loanBalanceRemaining,
-                currentAPR: values.currentAPR,
+                balanceLeft: values.loanBalanceRemaining,
+                currentApr: values.currentAPR,
                 remainingTermYears: values.remainingTermYears,
-                newAPR: values.newAPR,
+                newApr: values.newAPR,
                 newTermYears: values.newTermYears,
                 mobileNumber: data.mobileNumber || '',
               },
               result: {
-                estimatedNewPayment: results.estimatedNewPayment,
+                newMonthlyPayment: results.estimatedNewPayment,
                 monthlySavings: results.monthlySavings,
                 interestSavings: results.interestSavings,
+                newTotalInterest: results.newTotalInterest,
+                currentTotalInterestRemaining: results.currentTotalInterestRemaining,
+                balanceLeft: values.loanBalanceRemaining,
               },
             }),
           });

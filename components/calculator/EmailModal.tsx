@@ -352,7 +352,7 @@ export default function EmailModal({
       />
       <div
         ref={modalRef}
-        className="relative bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/40 max-w-lg w-full mx-4 max-h-[85vh] overflow-y-auto z-10 p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]"
+        className="relative bg-white rounded-2xl shadow-2xl border border-gray-200 max-w-lg w-full mx-4 max-h-[85vh] overflow-y-auto z-10 p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]"
         style={{ maxHeight: '85dvh' }}
         role="dialog"
         aria-modal="true"
