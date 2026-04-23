@@ -3,8 +3,8 @@ export const BASE_URL = 'https://www.drivepointexchange.com'
 export function getLocalBusinessSchema() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': `${BASE_URL}/#localbusiness`,
+    '@type': 'Organization',
+    '@id': `${BASE_URL}/#organization`,
     name: 'Drive Point Exchange',
     description: 'Professional auto financing solutions including auto loans, refinancing, vehicle coverage, home refinancing, and insurance consultation services.',
     image: `${BASE_URL}/logo.png`,

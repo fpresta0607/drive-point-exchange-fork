@@ -46,8 +46,8 @@ export const metadata: Metadata = {
     "vehicle coverage certifications",
     "home refinance",
     "insurance consultation",
-    "Detroit auto loans",
-    "Michigan car financing"
+    "nationwide auto loans",
+    "online auto financing"
   ],
   authors: [{ name: "Drive Point Exchange" }],
   creator: "Drive Point Exchange",

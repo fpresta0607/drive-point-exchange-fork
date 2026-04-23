@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "lower auto loan rate",
     "refinance car loan",
     "auto refinance savings",
-    "auto loan refinancing Chicago",
+    "auto loan refinancing online",
   ],
   openGraph: {
     title: "Auto Loan Refinance - Lower Your Monthly Payments | Drive Point Exchange",

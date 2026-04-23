@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
-import { createServiceClient } from '@/lib/supabase';
+import { createBrowserClient } from '@/lib/supabase';
 
 export const revalidate = 3600;
 
 export async function GET() {
   try {
-    const supabase = createServiceClient();
+    const supabase = createBrowserClient();
     const { data, error } = await supabase
       .from('social_posts')
       .select('id, platform, url, thumbnail, caption, embed_html, posted_at')

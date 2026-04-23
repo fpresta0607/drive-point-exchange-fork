@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "whole life insurance",
     "life insurance consulting",
     "living benefit riders",
-    "life insurance Chicago",
+    "life insurance nationwide",
   ],
   openGraph: {
     title: "Life Insurance Solutions - Protect Your Family's Future | Drive Point Exchange",

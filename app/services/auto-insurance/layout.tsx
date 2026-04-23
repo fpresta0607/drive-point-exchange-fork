@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "auto insurance savings",
     "multi-policy discount",
     "uninsured motorist coverage",
-    "auto insurance Chicago",
+    "auto insurance nationwide",
   ],
   openGraph: {
     title: "Auto Insurance Consulting - Optimize Your Coverage | Drive Point Exchange",

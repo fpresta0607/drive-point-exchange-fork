@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "improve credit score",
     "credit dispute",
     "FICO score improvement",
-    "credit counseling Chicago",
+    "credit counseling online",
   ],
   openGraph: {
     title: "Credit Consultations - Improve Your Credit Score | Drive Point Exchange",

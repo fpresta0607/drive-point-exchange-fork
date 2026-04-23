@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -12,16 +12,14 @@ import dynamic from "next/dynamic";
 const EmailModal = dynamic(() => import("@/components/calculator/EmailModal"), { ssr: false });
 
 function useIsMobile(breakpoint = 768) {
-  const [isMobile, setIsMobile] = useState(false);
-  const check = useCallback(() => {
-    setIsMobile(window.innerWidth < breakpoint);
-  }, [breakpoint]);
-  useEffect(() => {
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, [check]);
-  return isMobile;
+  return useSyncExternalStore(
+    (callback) => {
+      window.addEventListener("resize", callback);
+      return () => window.removeEventListener("resize", callback);
+    },
+    () => window.innerWidth < breakpoint,
+    () => false,
+  );
 }
 
 type LoanInputs = {
