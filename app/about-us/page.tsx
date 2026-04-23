@@ -14,19 +14,19 @@ export default function AboutUs() {
 
   const fadeInUp = prefersReducedMotion
     ? { initial: {}, animate: {}, transition: { duration: 0 } }
-    : { initial: { opacity: 0, y: 60 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.6 } };
+    : { initial: { opacity: 0, y: 24 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.3 } };
 
   const fadeInLeft = prefersReducedMotion
     ? { initial: {}, animate: {}, transition: { duration: 0 } }
-    : { initial: { opacity: 0, x: -60 }, animate: { opacity: 1, x: 0 }, transition: { duration: 0.6 } };
+    : { initial: { opacity: 0, x: -24 }, animate: { opacity: 1, x: 0 }, transition: { duration: 0.3 } };
 
   const fadeInRight = prefersReducedMotion
     ? { initial: {}, animate: {}, transition: { duration: 0 } }
-    : { initial: { opacity: 0, x: 60 }, animate: { opacity: 1, x: 0 }, transition: { duration: 0.6 } };
+    : { initial: { opacity: 0, x: 24 }, animate: { opacity: 1, x: 0 }, transition: { duration: 0.3 } };
 
   const staggerChildren = prefersReducedMotion
     ? { animate: {} }
-    : { animate: { transition: { staggerChildren: 0.1 } } };
+    : { animate: { transition: { staggerChildren: 0.05 } } };
   
   const values = [
     {

@@ -22,10 +22,10 @@ export function RevealText({
   textColor = "text-white",
   overlayColor = "text-dpe-green",
   fontSize = "text-[clamp(4rem,15vw,12rem)]",
-  letterDelay = 0.08,
-  overlayDelay = 0.05,
-  overlayDuration = 0.4,
-  springDuration = 600,
+  letterDelay = 0.04,
+  overlayDelay = 0.03,
+  overlayDuration = 0.3,
+  springDuration = 400,
   letterImages = [
     "/reveal-text/D.png",
     "/reveal-text/R.png",
@@ -71,9 +71,9 @@ export function RevealText({
               transition={{
                 delay: index * letterDelay,
                 type: "spring",
-                damping: 8,
-                stiffness: 200,
-                mass: 0.8,
+                damping: 14,
+                stiffness: 300,
+                mass: 0.6,
               }}
             >
               {/* Base text layer */}
@@ -95,7 +95,7 @@ export function RevealText({
                 }}
                 transition={{
                   opacity: { duration: 0.1 },
-                  backgroundPosition: { duration: 3, ease: "easeInOut" },
+                  backgroundPosition: { duration: 1.5, ease: "easeInOut" },
                 }}
                 style={{
                   backgroundImage: `url('${letterImages[index % letterImages.length]}')`,
