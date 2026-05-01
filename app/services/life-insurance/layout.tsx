@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: "Life Insurance Solutions - Protect Your Family's Future | Drive Point Exchange",
     description:
       "Bespoke life insurance consulting. Term life, whole life, living benefit riders, and tax-advantaged cash value accumulation.",
-    images: [{ url: "/auto/svc-life-insurance.jpg", width: 1200, height: 630, alt: "Life insurance consulting" }],
+    images: [{ url: "/auto/hero-life-insurance-v2.webp", width: 1200, height: 630, alt: "Life insurance consulting" }],
   },
   twitter: {
     title: "Life Insurance Solutions - Protect Your Family's Future",

@@ -11,18 +11,18 @@ const config: Config = {
       colors: {
         // Drive Point Exchange brand colors
         dpe: {
-          // Blue from car silhouette / DPE primary (#1934B5)
+          // Blue — anchored to DPE Navy (#0E1A56), shifted away from bright royal
           blue: {
             50: '#eef1fd',
             100: '#e0e6fb',
             200: '#c7d2f8',
             300: '#a3b5f3',
             400: '#7890ec',
-            500: '#536ae2',
-            600: '#3b4bd4',
-            700: '#2e36b8',
-            800: '#1934b5', // Anchor DPE Blue
-            900: '#0E1A56',
+            500: '#3b4bd4',
+            600: '#2e36b8',
+            700: '#1f2a8a',
+            800: '#0E1A56', // Anchor DPE Navy (was royal #1934b5)
+            900: '#060C38',
           },
           // Green from Upward Arrows / DPE accent (#2DB843)
           green: {
@@ -70,9 +70,9 @@ const config: Config = {
         "color-5": "hsl(var(--color-5))",
       },
       fontFamily: {
-        sans: ['var(--font-outfit)', 'Outfit', 'system-ui', 'sans-serif'],
-        heading: ['var(--font-heading)', 'Montserrat', 'system-ui', 'sans-serif'],
-        display: ['var(--font-heading)', 'Montserrat', 'system-ui', 'sans-serif'],
+        sans: ['Satoshi', 'system-ui', 'sans-serif'],
+        heading: ['Satoshi', 'system-ui', 'sans-serif'],
+        display: ['Satoshi', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         'hero-pattern': "url('/hero-bg.jpg')",

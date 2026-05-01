@@ -22,14 +22,14 @@ const sizeClasses = {
 
 const variantClasses = {
   primary: "bg-dpe-green text-white",
-  "primary-dark": "bg-dpe-navy text-white",
+  "primary-dark": "bg-slate-950 text-white",
   secondary: "bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20",
   hero: "bg-white/10 backdrop-blur-sm border border-white/25 hover:bg-white/15 hover:border-white/40 text-white",
 } as const;
 
 const slideColor = {
   primary: "bg-dpe-green/80",
-  "primary-dark": "bg-dpe-blue",
+  "primary-dark": "bg-slate-800",
   secondary: "",
   hero: "",
 } as const;
@@ -66,19 +66,17 @@ export function CTAButton({
         {children}
       </span>
       {showArrow && (
-        <div className="relative z-10 w-8 h-8 bg-white/15 rounded-full flex items-center justify-center group-hover:bg-white/25 transition-colors duration-250">
-          <ArrowUpRight className="w-4 h-4 group-hover:text-white transition-colors duration-250" />
-        </div>
+        <ArrowUpRight className="relative z-10 w-4 h-4 transition-transform duration-250 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       )}
     </>
   );
 
   const sharedClasses = cn(
-    "group relative inline-flex items-center justify-center gap-4 font-semibold rounded-full overflow-hidden transition-all hover:scale-[1.03] active:scale-[0.98]",
+    "group relative inline-flex items-center justify-center gap-3 font-semibold overflow-hidden transition-colors",
     sizeClasses[size],
     variantClasses[variant],
     variant === "hero" ? "hero-cta-pulse" : hasSlide && "cta-border-pulse",
-    disabled && "opacity-50 cursor-not-allowed hover:scale-100 active:scale-100",
+    disabled && "opacity-50 cursor-not-allowed",
     className
   );
 

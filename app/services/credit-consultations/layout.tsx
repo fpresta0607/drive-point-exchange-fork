@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: "Credit Consultations - Improve Your Credit Score | Drive Point Exchange",
     description:
       "Expert credit consulting. Tri-bureau analysis, dispute resolution, credit utilization optimization, and long-term wealth building roadmaps.",
-    images: [{ url: "/auto/car-loan3.jpg", width: 1200, height: 630, alt: "Credit consultation services" }],
+    images: [{ url: "/auto/hero-credit-calculator-v2.webp", width: 1200, height: 630, alt: "Credit consultation services" }],
   },
   twitter: {
     title: "Credit Consultations - Improve Your Credit Score",

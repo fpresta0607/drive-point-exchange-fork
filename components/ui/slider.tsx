@@ -58,7 +58,7 @@ const Slider = React.forwardRef<
   const renderThumb = (value: number) => {
     const thumb = (
       <SliderPrimitive.Thumb
-        className="block h-5 w-5 rounded-full border-2 border-white bg-white shadow-[0_0_10px_rgba(45,184,67,0.5)] transition-all focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-dpe-green-500/40 data-[disabled]:cursor-not-allowed hover:scale-110"
+        className="block h-5 w-5 rounded-full border-2 border-white bg-white shadow-[0_0_10px_rgba(14,26,86,0.45)] transition-all focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-dpe-navy/40 data-[disabled]:cursor-not-allowed hover:scale-110"
         onPointerDown={handlePointerDown}
         aria-label={ariaLabel}
       />
@@ -93,7 +93,7 @@ const Slider = React.forwardRef<
       {...props}
     >
       <SliderPrimitive.Track className="relative grow overflow-hidden rounded-full bg-slate-200/80 shadow-inner data-[orientation=horizontal]:h-2 data-[orientation=vertical]:h-full data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-3">
-        <SliderPrimitive.Range className="absolute bg-gradient-to-t from-dpe-green-500 to-green-400 shadow-[0_0_15px_rgba(45,184,67,0.6)] data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full" />
+        <SliderPrimitive.Range className="absolute bg-gradient-to-t from-dpe-navy-deep to-dpe-navy shadow-[0_0_15px_rgba(14,26,86,0.45)] data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full" />
       </SliderPrimitive.Track>
       {internalValue?.map((value, index) => (
         <React.Fragment key={index}>{renderThumb(value)}</React.Fragment>

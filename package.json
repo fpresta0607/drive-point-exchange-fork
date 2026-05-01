@@ -35,17 +35,17 @@
   },
   "devDependencies": {
     "@google/genai": "^1.46.0",
-    "@types/nodemailer": "^7.0.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/nodemailer": "^7.0.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "baseline-browser-mapping": "^2.10.16",
     "eslint": "^9",
     "eslint-config-next": "16.0.0",
-    "tailwindcss": "^4",
     "playwright": "^1.58.2",
     "shadcn": "^4.1.2",
+    "tailwindcss": "^4",
     "typescript": "^5"
   }
 }

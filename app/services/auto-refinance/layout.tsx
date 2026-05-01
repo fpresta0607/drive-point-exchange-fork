@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: "Auto Loan Refinance - Lower Your Monthly Payments | Drive Point Exchange",
     description:
       "Refinance your auto loan with Drive Point Exchange. Lower rates, flexible terms, seamless lender transition.",
-    images: [{ url: "/auto/car-loan.jpg", width: 1200, height: 630, alt: "Auto loan refinancing consultation" }],
+    images: [{ url: "/auto/hero-auto-refinance-v2.webp", width: 1200, height: 630, alt: "Auto loan refinancing consultation" }],
   },
   twitter: {
     title: "Auto Loan Refinance - Lower Your Monthly Payments",

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 interface EmailModalProps {
   isOpen: boolean;
@@ -202,7 +203,7 @@ export default function EmailModal({
                 type="text"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg border border-dpe-gray-300 focus:ring-2 focus:ring-dpe-blue focus:border-transparent text-base text-dpe-gray-900"
+                className="w-full h-10 px-3 rounded-none border border-dpe-gray-300 focus:ring-2 focus:ring-dpe-blue focus:border-transparent text-base text-dpe-gray-900"
                 placeholder="First Name"
                 disabled={isSubmitting}
                 aria-required="true"
@@ -218,7 +219,7 @@ export default function EmailModal({
                 type="text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg border border-dpe-gray-300 focus:ring-2 focus:ring-dpe-blue focus:border-transparent text-base text-dpe-gray-900"
+                className="w-full h-10 px-3 rounded-none border border-dpe-gray-300 focus:ring-2 focus:ring-dpe-blue focus:border-transparent text-base text-dpe-gray-900"
                 placeholder="Last Name"
                 disabled={isSubmitting}
                 aria-required="true"
@@ -236,7 +237,7 @@ export default function EmailModal({
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full h-10 px-3 rounded-lg border border-dpe-gray-300 focus:ring-2 focus:ring-dpe-blue focus:border-transparent text-base text-dpe-gray-900"
+              className="w-full h-10 px-3 rounded-none border border-dpe-gray-300 focus:ring-2 focus:ring-dpe-blue focus:border-transparent text-base text-dpe-gray-900"
               placeholder="Email Address"
               disabled={isSubmitting}
               aria-required="true"
@@ -253,7 +254,7 @@ export default function EmailModal({
               type="tel"
               value={mobileNumber}
               onChange={(e) => setMobileNumber(e.target.value)}
-              className="w-full h-10 px-3 rounded-lg border border-dpe-gray-300 focus:ring-2 focus:ring-dpe-blue focus:border-transparent text-base text-dpe-gray-900"
+              className="w-full h-10 px-3 rounded-none border border-dpe-gray-300 focus:ring-2 focus:ring-dpe-blue focus:border-transparent text-base text-dpe-gray-900"
               placeholder="Mobile Number (Optional)"
               disabled={isSubmitting}
               aria-describedby="form-error"
@@ -269,7 +270,7 @@ export default function EmailModal({
               type="text"
               value={promoCode}
               onChange={(e) => setPromoCode(e.target.value)}
-              className="w-full h-10 px-3 rounded-lg border border-dpe-gray-300 focus:ring-2 focus:ring-dpe-blue focus:border-transparent text-base text-dpe-gray-900"
+              className="w-full h-10 px-3 rounded-none border border-dpe-gray-300 focus:ring-2 focus:ring-dpe-blue focus:border-transparent text-base text-dpe-gray-900"
               placeholder="Promo Code (Optional)"
               disabled={isSubmitting}
             />
@@ -282,7 +283,7 @@ export default function EmailModal({
               type="checkbox"
               checked={isAgent}
               onChange={(e) => handleAgentChange(e.target.checked)}
-              className="mt-1 h-4 w-4 text-dpe-blue focus:ring-dpe-blue border-dpe-gray-300 rounded"
+              className="mt-1 h-4 w-4 text-dpe-blue focus:ring-dpe-blue border-dpe-gray-300 rounded-none"
               disabled={isSubmitting}
             />
             <label htmlFor="isAgent" className="text-xs text-dpe-gray-600 leading-relaxed">
@@ -297,7 +298,7 @@ export default function EmailModal({
               type="checkbox"
               checked={smsConsent}
               onChange={(e) => setSmsConsent(e.target.checked)}
-              className="mt-1 h-4 w-4 text-dpe-blue focus:ring-dpe-blue border-dpe-gray-300 rounded"
+              className="mt-1 h-4 w-4 text-dpe-blue focus:ring-dpe-blue border-dpe-gray-300 rounded-none"
               disabled={isSubmitting || isAgent}
             />
             <label htmlFor="smsConsent" className="text-xs text-dpe-gray-500 leading-relaxed">
@@ -313,7 +314,7 @@ export default function EmailModal({
           )}
 
           {error && (
-            <div id="form-error" role="alert" className="text-red-600 text-sm bg-red-50 p-3 rounded-lg">
+            <div id="form-error" role="alert" className="text-red-600 text-sm bg-red-50 p-3">
               {error}
             </div>
           )}
@@ -322,7 +323,7 @@ export default function EmailModal({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 h-10 px-4 rounded-full border border-dpe-gray-300 text-dpe-gray-700 hover:bg-dpe-gray-50 disabled:opacity-50 transition-colors"
+              className="flex-1 h-10 px-4 border border-dpe-gray-300 text-dpe-gray-700 hover:bg-dpe-gray-50 disabled:opacity-50 transition-colors"
               disabled={isSubmitting}
             >
               Cancel
@@ -343,7 +344,9 @@ export default function EmailModal({
     return <div ref={modalRef} className={className}>{formContent}</div>;
   }
 
-  return (
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
     <div className={`fixed inset-0 z-[9999] flex items-start pt-4 sm:items-center sm:pt-0 justify-center ${className}`}>
       <div
         className="fixed inset-0 bg-black/60 backdrop-blur-sm"
@@ -352,7 +355,7 @@ export default function EmailModal({
       />
       <div
         ref={modalRef}
-        className="relative bg-white rounded-2xl shadow-2xl border border-gray-200 max-w-lg w-full mx-4 max-h-[85vh] overflow-y-auto z-10 p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]"
+        className="relative bg-white shadow-2xl border border-slate-200 max-w-lg w-full mx-4 max-h-[85vh] overflow-y-auto z-10 p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]"
         style={{ maxHeight: '85dvh' }}
         role="dialog"
         aria-modal="true"
@@ -360,6 +363,7 @@ export default function EmailModal({
       >
         {formContent}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
@@ -8,68 +8,13 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import Navigation from '../../components/Navigation';
 import Footer from '../../components/Footer';
 import { useI18n } from '../../lib/i18n/context';
-import { GradientText } from '../../components/ui/gradient-text';
-import { CTAButton } from '../../components/ui/cta-button';
+import { SectionKicker } from '../../components/ui/section-kicker';
 
 const AutoLoanRefinanceCalculator = dynamic(
   () => import('../../components/ui/auto-loan-refinance-calculator').then(m => m.AutoLoanRefinanceCalculator),
   { ssr: false }
 );
-const ShaderBackground = dynamic(() => import('../../components/ui/shader-background'), { ssr: false });
 const SocialFeed = dynamic(() => import('../../components/SocialFeed'), { ssr: false });
-
-const heroCtaWords = [
-  { label: "Start Today", href: "/contact" },
-  { label: "Contact Us", href: "/contact" },
-  { label: "Calculate Savings", href: "/calculator?type=auto" },
-];
-
-function HeroWordCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % heroCtaWords.length);
-    }, 2800);
-    return () => clearInterval(interval);
-  }, []);
-
-  const current = heroCtaWords[currentIndex];
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, delay: 0.3 }}
-      className="flex justify-center"
-    >
-      <Link
-        href={current.href}
-        className="group relative inline-flex items-center justify-center gap-3 py-4 px-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/25 overflow-hidden transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] hover:bg-white/15 hover:border-white/40 hero-cta-pulse"
-      >
-        <div className="relative h-6 overflow-hidden min-w-[180px]">
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={currentIndex}
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -14 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="absolute inset-0 flex items-center justify-center text-overline text-white tracking-[0.15em] font-bold drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
-            >
-              {current.label}
-            </motion.span>
-          </AnimatePresence>
-        </div>
-        <div className="relative z-10 w-7 h-7 bg-white/15 rounded-full flex items-center justify-center group-hover:bg-white/25 transition-colors duration-300">
-          <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
-          </svg>
-        </div>
-      </Link>
-    </motion.div>
-  );
-}
 
 export default function Home() {
   const { ts } = useI18n();
@@ -89,7 +34,7 @@ export default function Home() {
     {
       title: ts('home.services.autoRefinance.title'),
       description: ts('home.services.autoRefinance.description'),
-      image: "/auto/car-loan.jpg",
+      image: "/auto/hero-auto-refinance-v2.webp",
       href: "/services/auto-refinance",
       category: "Auto Refinance",
       icon: (
@@ -101,7 +46,7 @@ export default function Home() {
     {
       title: ts('home.services.vehicleCoverage.title'),
       description: ts('home.services.vehicleCoverage.description'),
-      image: "/auto/porsche-garage.jpg",
+      image: "/auto/hero-vehicle-coverage-v2.webp",
       href: "/services/vehicle-coverage",
       category: "Coverage & Protection",
       icon: (
@@ -113,7 +58,7 @@ export default function Home() {
     {
       title: ts('home.services.homeRefinance.title'),
       description: ts('home.services.homeRefinance.description'),
-      image: "/auto/svc-home-refinance.jpg",
+      image: "/auto/hero-home-refinance-v2.webp",
       href: "/services/home-refinance",
       category: "Home Loans",
       icon: (
@@ -125,7 +70,7 @@ export default function Home() {
     {
       title: ts('home.services.insuranceConsultation.title'),
       description: ts('home.services.insuranceConsultation.description'),
-      image: "/auto/svc-auto-insurance.jpg",
+      image: "/auto/hero-auto-insurance-v2.webp",
       href: "/services/auto-insurance",
       category: "Auto Insurance",
       icon: (
@@ -137,7 +82,7 @@ export default function Home() {
     {
       title: ts('home.services.lifeInsurance.title'),
       description: ts('home.services.lifeInsurance.description'),
-      image: "/auto/svc-life-insurance.jpg",
+      image: "/auto/hero-life-insurance-v2.webp",
       href: "/services/life-insurance",
       category: "Life Insurance",
       icon: (
@@ -149,7 +94,7 @@ export default function Home() {
     {
       title: ts('home.services.creditSavings.title'),
       description: ts('home.services.creditSavings.description'),
-      image: "/auto/car-loan3.jpg",
+      image: "/auto/hero-credit-calculator-v2.webp",
       href: "/services/credit-consultations",
       category: "Credit & Savings",
       icon: (
@@ -164,62 +109,93 @@ export default function Home() {
     <div className="min-h-screen bg-[#f8fafc]">
       <Navigation overlay />
 
-      {/* ─── HERO ─── full viewport, nav overlays */}
-      <section className="relative min-h-[100svh] w-full flex flex-col justify-center overflow-hidden pt-20 pb-40">
-        {/* Background Image Container */}
-        <div className="absolute inset-0 z-0 bg-slate-900 pointer-events-none">
-          <motion.div
-            animate={{
-              scale: [1.02, 1.12, 1.02],
-              x: ["0%", "-1%", "0%"],
-              y: ["0%", "1%", "0%"],
+      {/* ─── HERO ─── editorial, sharp, Rogo/Harvey aesthetic */}
+      <section className="relative min-h-[100svh] w-full flex flex-col justify-center overflow-hidden pt-32 pb-40">
+        {/* Background — static photo, layered scrims */}
+        <div className="absolute inset-0 z-0 bg-slate-950 pointer-events-none">
+          <Image
+            src="/auto/heroGarage2.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-slate-950/55" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/50 to-slate-950/30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/30 via-transparent to-slate-950/90" />
+          <div className="absolute top-1/3 right-[-10%] w-[640px] h-[640px] bg-dpe-green/12 rounded-full blur-[160px] mix-blend-screen" />
+          {/* Hairline grid overlay for editorial feel */}
+          <div
+            className="absolute inset-0 opacity-[0.06] mix-blend-overlay"
+            style={{
+              backgroundImage:
+                'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
+              backgroundSize: '120px 120px',
             }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            className="absolute inset-0 w-full h-full"
-          >
-            <Image
-              src="/auto/heroGarage2.jpg"
-              alt="Garage Background"
-              fill
-              sizes="100vw"
-              className="object-cover opacity-100"
-              priority
-            />
-          </motion.div>
-          <div className="absolute inset-0 bg-slate-950/40" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-slate-950/80" />
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-dpe-green/20 rounded-full blur-[150px] opacity-60 mix-blend-screen translate-x-1/2 -translate-y-1/2" />
+          />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 w-full flex flex-col items-center justify-center">
-          <div className="w-full max-w-5xl mx-auto text-center">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 w-full">
+          <div className="max-w-3xl">
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] text-white leading-[1.08] mb-8 font-heading font-extrabold tracking-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]"
+              transition={{ duration: 0.4, delay: 0.05 }}
             >
-              Your Roadmap to{" "}
-              <br className="hidden sm:block" />
-              <GradientText>
-                Financial Freedom
-              </GradientText>
+              <SectionKicker align="left" tone="white">
+                Drive Point Exchange · Nationwide
+              </SectionKicker>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.12 }}
+              className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] text-white leading-[0.98] font-heading font-bold tracking-[-0.03em] mb-7"
+            >
+              Your roadmap to<br />
+              financial freedom.
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.2 }}
-              className="text-lg md:text-xl text-white/80 font-light max-w-2xl mx-auto mb-10 leading-relaxed"
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="text-lg md:text-xl text-white/65 font-light max-w-xl mb-10 leading-relaxed"
             >
-              Lower your payments, protect your vehicle, and build a stronger financial future - backed by experts who put you first.
+              Lower your payments, protect your vehicle, and build a stronger financial future — with experts who put you first.
             </motion.p>
 
-            <HeroWordCarousel />
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.28 }}
+              className="flex flex-wrap items-center gap-3"
+            >
+              <Link
+                href="/contact"
+                className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-white text-slate-950 text-sm font-semibold tracking-wide hover:bg-white/90 transition-colors"
+              >
+                Start your application
+                <svg
+                  className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  viewBox="0 0 24 24"
+                  aria-hidden
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link
+                href="/calculator?type=auto"
+                className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/15 text-white text-sm font-medium hover:bg-white/[0.04] hover:border-white/30 transition-colors"
+              >
+                Calculate savings
+              </Link>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -236,44 +212,49 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ─── SERVICES TABS ─── */}
-      <section className="py-24 bg-[#0A1340] overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ─── SERVICES TABS ─── editorial dark band, sharp panels */}
+      <section className="bg-[#01040E] overflow-hidden border-t border-white/[0.06]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20">
 
-          {/* Header */}
+          {/* Header — left-aligned, restrained */}
           <motion.div
             initial="initial"
             whileInView="animate"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '-80px' }}
             variants={staggerChildren}
-            className="text-center mb-14"
+            className="mb-14 max-w-2xl"
           >
-            <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 border border-dpe-green/30 bg-dpe-green/10 rounded-full px-4 py-1.5 mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-dpe-green animate-pulse" />
-              <span className="text-overline text-dpe-green">Our Services</span>
+            <motion.div variants={fadeInUp}>
+              <SectionKicker align="left" tone="white">
+                Our services
+              </SectionKicker>
             </motion.div>
-            <motion.h2 variants={fadeInUp} className="text-4xl sm:text-5xl text-white">
+            <motion.h2
+              variants={fadeInUp}
+              className="text-4xl sm:text-5xl lg:text-6xl text-white tracking-[-0.025em] leading-[1.02]"
+            >
               {ts('home.services.title')}
             </motion.h2>
           </motion.div>
 
-          {/* Tab bar */}
+          {/* Tab bar — sharp segmented */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-wrap justify-center gap-2 mb-10"
+            transition={{ duration: 0.4 }}
+            className="flex flex-wrap gap-0 mb-10 border border-white/10"
           >
             {services.map((service, index) => (
               <button
                 key={index}
+                type="button"
                 onClick={() => setActiveService(index)}
                 aria-label={service.category}
-                className={`relative flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                className={`relative flex items-center gap-2 px-5 py-3 text-xs font-semibold uppercase tracking-[0.12em] transition-colors duration-200 border-r border-white/10 last:border-r-0 ${
                   activeService === index
-                    ? 'text-[#0A1340] bg-dpe-green shadow-[0_0_20px_rgba(34,197,94,0.4)]'
-                    : 'text-white/60 bg-white/5 border border-white/10 hover:bg-white/10 hover:text-white'
+                    ? 'text-slate-950 bg-white'
+                    : 'text-white/55 bg-transparent hover:text-white hover:bg-white/[0.04]'
                 }`}
               >
                 {service.icon}
@@ -282,15 +263,18 @@ export default function Home() {
             ))}
           </motion.div>
 
-          {/* Feature panel */}
-          <div className="relative rounded-2xl overflow-hidden" style={{ height: '520px' }}>
+          {/* Feature panel — sharp, hairline-bordered */}
+          <div
+            className="relative overflow-hidden border border-white/10"
+            style={{ height: '560px' }}
+          >
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeService}
-                initial={{ opacity: 0, scale: 1.02 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
                 className="absolute inset-0"
               >
                 <Image
@@ -300,45 +284,59 @@ export default function Home() {
                   sizes="(min-width: 1280px) 1200px, 100vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#0A1340]/70 via-transparent to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0A1340]/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#01040E]/75 via-[#01040E]/15 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#01040E]/55 via-transparent to-transparent" />
               </motion.div>
             </AnimatePresence>
 
             {/* Content overlay */}
-            <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-12 max-w-xl">
+            <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-14 max-w-2xl">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`content-${activeService}`}
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.2, ease: 'easeOut' }}
+                  transition={{ duration: 0.25, ease: [0.32, 0.72, 0, 1] }}
                 >
-                  <span className="inline-flex items-center gap-1.5 text-overline text-dpe-green mb-3">
-                    {services[activeService].icon}
+                  <span className="inline-flex items-center gap-2 text-overline text-dpe-green mb-4">
+                    <span aria-hidden className="block w-0.5 h-3.5 bg-dpe-green" />
                     {services[activeService].category}
                   </span>
-                  <h3 className="text-3xl md:text-4xl text-white mb-4 leading-tight">
+                  <h3 className="text-3xl md:text-5xl text-white mb-5 leading-[1.04] tracking-[-0.02em] font-bold">
                     {services[activeService].title}
                   </h3>
-                  <p className="text-white/70 text-base leading-relaxed mb-6 font-light">
+                  <p className="text-white/70 text-base md:text-lg leading-relaxed mb-7 font-light max-w-lg">
                     {services[activeService].description}
                   </p>
-                  <CTAButton href={services[activeService].href} showArrow>
+                  <Link
+                    href={services[activeService].href}
+                    className="group inline-flex items-center gap-2.5 px-6 py-3 bg-white text-slate-950 text-sm font-semibold tracking-wide hover:bg-white/90 transition-colors"
+                  >
                     {ts('home.services.learnMore')}
-                  </CTAButton>
+                    <svg
+                      className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      viewBox="0 0 24 24"
+                      aria-hidden
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 5l7 7-7 7" />
+                    </svg>
+                  </Link>
                 </motion.div>
               </AnimatePresence>
 
-              {/* Step indicators */}
-              <div className="flex gap-1.5 mt-8">
+              {/* Step indicators — sharp ticks */}
+              <div className="flex gap-1.5 mt-10">
                 {services.map((_, i) => (
                   <button
                     key={i}
+                    type="button"
                     onClick={() => setActiveService(i)}
-                    className={`h-1 rounded-full transition-all duration-300 ${
-                      i === activeService ? 'w-8 bg-dpe-green' : 'w-2 bg-white/30 hover:bg-white/50'
+                    className={`h-px transition-all duration-300 ${
+                      i === activeService ? 'w-10 bg-dpe-green' : 'w-5 bg-white/25 hover:bg-white/50'
                     }`}
                     aria-label={`Go to service ${i + 1}`}
                   />
@@ -348,77 +346,141 @@ export default function Home() {
           </div>
 
         </div>
-      </section>
 
-      {/* ─── TRUST ─── */}
-      <section className="relative py-24 bg-slate-950 overflow-hidden border-t border-white/10">
-        <div className="absolute inset-0 z-0">
-          <ShaderBackground className="absolute top-0 left-0 w-full h-full opacity-80" />
-          <div className="absolute inset-0 bg-dpe-blue/40 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-transparent to-slate-950/80" />
-        </div>
-        
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 z-10 w-full flex flex-col gap-8 lg:gap-12 items-center">
-          <motion.div
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={staggerChildren}
-            className="text-center mb-12"
-          >
-            <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 border border-white/20 bg-white/5 backdrop-blur-sm rounded-full px-4 py-1.5 mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-dpe-green animate-pulse" />
-              <span className="text-overline text-white/80">Trusted Nationwide</span>
-            </motion.div>
-            <motion.h2 variants={fadeInUp} className="text-4xl sm:text-5xl text-white mb-4">
-              {ts('home.trust.title')}
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-lg text-slate-400 font-light">
-              {ts('home.trust.subtitle')}
-            </motion.p>
-          </motion.div>
+        {/* ─── TRUSTPILOT REVIEWS BAR — full bleed across bottom of section ─── */}
+        <motion.a
+          href="https://www.trustpilot.com/review/drivepointexchange.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.4 }}
+          className="group block w-full bg-[#01040E] border-t border-white/[0.08] hover:bg-[#05091a] transition-colors"
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-8">
+            {/* Left: Excellent + stars */}
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-0.5" aria-hidden>
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <span key={i} className="flex items-center justify-center w-6 h-6 bg-dpe-green-500">
+                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  </span>
+                ))}
+              </div>
+              <span className="text-white text-sm font-semibold tracking-wide">Excellent</span>
+            </div>
 
-        </div>
+            {/* Middle: rating + count, separated by hairlines */}
+            <div className="flex flex-wrap items-center gap-4 md:gap-6 text-sm">
+              <div className="flex items-center gap-2 md:border-l md:border-white/[0.1] md:pl-6">
+                <span className="text-white font-semibold">4.9</span>
+                <span className="text-white/45">out of 5</span>
+              </div>
+              <div className="flex items-center gap-2 md:border-l md:border-white/[0.1] md:pl-6">
+                <span className="text-white/45">Based on</span>
+                <span className="text-white font-medium">1,200+ verified reviews</span>
+              </div>
+            </div>
+
+            {/* Right: Trustpilot wordmark + arrow */}
+            <div className="flex items-center gap-3 md:border-l md:border-white/[0.1] md:pl-6 text-sm">
+              <span className="text-[10px] uppercase tracking-[0.16em] font-semibold text-white/45">on</span>
+              <span className="inline-flex items-center gap-1.5 text-white font-semibold">
+                <svg className="w-4 h-4 text-dpe-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden>
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                Trustpilot
+              </span>
+              <svg
+                className="w-4 h-4 text-white/55 transition-transform group-hover:translate-x-0.5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+                aria-hidden
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+        </motion.a>
       </section>
 
       <SocialFeed />
 
-      {/* ─── CTA ─── */}
-      <section className="py-24 bg-white border-t border-gray-100">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* ─── CTA ─── light editorial close */}
+      <section className="py-28 bg-white border-t border-slate-200/70">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="initial"
             whileInView="animate"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '-80px' }}
             variants={staggerChildren}
+            className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-20 items-end"
           >
-            <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 border border-dpe-green/20 bg-dpe-green/5 rounded-full px-4 py-1.5 mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-dpe-green animate-pulse" />
-              <span className="text-overline text-dpe-green">Get Started Today</span>
-            </motion.div>
-            <motion.h2 variants={fadeInUp} className="text-4xl sm:text-5xl text-gray-900 mb-4">
-              {ts('home.cta.title')}
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-lg text-gray-400 font-light mb-10 max-w-2xl mx-auto">
-              {ts('home.cta.subtitle')}
-            </motion.p>
-
-            <motion.div variants={fadeInUp} className="flex justify-center mb-12">
-              <CTAButton href="/contact" variant="primary">
-                Get in Touch
-              </CTAButton>
-            </motion.div>
+            <div>
+              <motion.div variants={fadeInUp}>
+                <SectionKicker align="left" tone="green">
+                  Get started today
+                </SectionKicker>
+              </motion.div>
+              <motion.h2
+                variants={fadeInUp}
+                className="text-4xl sm:text-5xl lg:text-6xl text-slate-950 mb-6 tracking-[-0.025em] leading-[1.02]"
+              >
+                {ts('home.cta.title')}
+              </motion.h2>
+              <motion.p
+                variants={fadeInUp}
+                className="text-lg text-slate-500 font-light leading-relaxed mb-9 max-w-xl"
+              >
+                {ts('home.cta.subtitle')}
+              </motion.p>
+              <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-3">
+                <Link
+                  href="/contact"
+                  className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-slate-950 text-white text-sm font-semibold tracking-wide hover:bg-slate-800 transition-colors"
+                >
+                  Get in touch
+                  <svg
+                    className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                    aria-hidden
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                </Link>
+                <Link
+                  href="/services"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 border border-slate-300 text-slate-700 text-sm font-medium hover:border-slate-950 hover:text-slate-950 transition-colors"
+                >
+                  Explore services
+                </Link>
+              </motion.div>
+            </div>
 
             <motion.div
               variants={fadeInUp}
-              className="flex flex-col sm:flex-row items-center justify-center gap-6 bg-[#f8fafc] border border-gray-100 rounded-2xl px-8 py-6"
+              className="border-l border-slate-200 pl-8 py-2 lg:py-6"
             >
-              <div className="text-center sm:text-left">
-                <p className="text-overline text-gray-400 mb-1">Main Office</p>
-                <a href="tel:+18883510782" className="text-xl font-semibold text-gray-900 hover:text-dpe-green transition-colors tracking-tight">
-                  (888) 351-0782
-                </a>
-              </div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400 mb-2">
+                Main office
+              </p>
+              <a
+                href="tel:+18883510782"
+                className="text-3xl lg:text-4xl font-bold text-slate-950 hover:text-dpe-green transition-colors tracking-[-0.02em]"
+              >
+                (888) 351-0782
+              </a>
+              <p className="text-sm text-slate-500 font-light mt-3 leading-relaxed">
+                Speak with a financing specialist — no obligations, no fees.
+              </p>
             </motion.div>
           </motion.div>
         </div>

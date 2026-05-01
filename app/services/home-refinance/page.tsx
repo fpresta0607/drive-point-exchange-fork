@@ -20,7 +20,7 @@ export default function Page() {
         `Debt consolidation at lower interest rates`,
         `Flexible 15, 20, and 30-year fixed terms`
       ]}
-      imageSrc="/auto/svc-home-refinance.jpg"
+      imageSrc="/auto/hero-home-refinance-v2.webp"
     />
   );
 }

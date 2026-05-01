@@ -20,7 +20,7 @@ export default function Page() {
         `Teen driver cost mitigation strategies`,
         `Direct connections to top-tier underwriters`
       ]}
-      imageSrc="/auto/svc-auto-insurance.jpg"
+      imageSrc="/auto/hero-auto-insurance-v2.webp"
     />
   );
 }

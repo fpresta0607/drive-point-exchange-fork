@@ -4,6 +4,43 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ─── Satoshi (self-hosted, woff2) ─── */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Changed to deepest navy for high contrast DPE text */
 
@@ -55,15 +92,15 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-heading: var(--font-heading), 'Montserrat', sans-serif;
-  --font-outfit: var(--font-outfit), 'Outfit', sans-serif;
-  --font-sans: var(--font-sans);
+  --font-heading: 'Satoshi', system-ui, sans-serif;
+  --font-outfit: 'Satoshi', system-ui, sans-serif;
+  --font-sans: 'Satoshi', system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
 
   /* Brand colors */
   --color-dpe-navy: #0E1A56;
   --color-dpe-navy-deep: #060C38;
-  --color-dpe-blue: #1934B5;
+  --color-dpe-blue: #0E1A56;
   --color-dpe-blue-light: #4A6FE0;
   --color-dpe-green: #2DB843;
   --color-dpe-slate: #64748b;
@@ -82,7 +119,6 @@
 
   /* Rainbow animation */
   --animate-rainbow: rainbow var(--speed, 2s) infinite linear;
-  --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -126,9 +162,21 @@ html {
 }
 
 body {
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-family: 'Satoshi', system-ui, sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+/* Logo dark variant — masked to footer navy (#070C2A) */
+.logo-mask-dark {
+  -webkit-mask-image: url('/logo-no%20bg.png');
+  mask-image: url('/logo-no%20bg.png');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: left center;
+  mask-position: left center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 
 /* Navy scrollbar */
@@ -207,7 +255,7 @@ input[type="range"]::-webkit-slider-track {
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  background: linear-gradient(135deg, #1934B5 0%, #0E1A56 100%);
+  background: linear-gradient(135deg, #0E1A56 0%, #0E1A56 100%);
   height: 24px;
   width: 24px;
   border-radius: 50%;
@@ -218,7 +266,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-  background: linear-gradient(135deg, #4A6FE0 0%, #1934B5 100%);
+  background: linear-gradient(135deg, #4A6FE0 0%, #0E1A56 100%);
   transform: scale(1.1);
   box-shadow: 0 6px 12px rgba(25, 52, 181, 0.4), 0 4px 8px rgba(0, 0, 0, 0.15);
 }
@@ -231,7 +279,7 @@ input[type="range"]::-moz-range-track {
 }
 
 input[type="range"]::-moz-range-thumb {
-  background: linear-gradient(135deg, #1934B5 0%, #0E1A56 100%);
+  background: linear-gradient(135deg, #0E1A56 0%, #0E1A56 100%);
   height: 24px;
   width: 24px;
   border-radius: 50%;
@@ -265,13 +313,13 @@ input[type="range"]::-moz-range-thumb {
   }
 }
 
-/* Pulsing blue border for CTA buttons on hover */
+/* Pulsing brand border for CTA buttons on hover — green ring with navy/green halo */
 @keyframes border-pulse {
   0%, 100% {
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.6), 0 0 8px rgba(59, 130, 246, 0.15);
+    box-shadow: 0 0 0 2px rgba(45, 184, 67, 0.55), 0 0 10px rgba(14, 26, 86, 0.18);
   }
   50% {
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 1), 0 0 16px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 0 2px rgba(45, 184, 67, 0.95), 0 0 18px rgba(45, 184, 67, 0.32);
   }
 }
 
@@ -317,7 +365,7 @@ input[type="range"]::-moz-range-thumb {
   100% { background-position: 0% 50%; }
 }
 
-/* Electrified CTA button — smooth flowing blue-white border + glow */
+/* Electrified CTA button — slate-900 fill, flowing green border + glow */
 .glow-cta {
   --_border: 2px;
   position: relative;
@@ -325,10 +373,10 @@ input[type="range"]::-moz-range-thumb {
   align-items: center;
   justify-content: center;
   border: var(--_border) solid transparent;
-  border-radius: 9999px;
+  border-radius: 0;
   background:
-    linear-gradient(135deg, #1A2158, #0F1648) padding-box,
-    linear-gradient(90deg, #3b82f6, #93c5fd, #dbeafe, #93c5fd, #3b82f6) border-box;
+    linear-gradient(135deg, #0f172a, #0f172a) padding-box,
+    linear-gradient(90deg, #2DB843, #3ac88e, #5aa0e8, #3ac88e, #2DB843) border-box;
   background-size: 100% 100%, 200% 100%;
   animation: glow-flow 4s linear infinite;
   cursor: pointer;
@@ -343,12 +391,12 @@ input[type="range"]::-moz-range-thumb {
   left: 12%;
   right: 12%;
   height: 40%;
-  background: linear-gradient(90deg, #3b82f6, #93c5fd, #dbeafe, #93c5fd, #3b82f6);
+  background: linear-gradient(90deg, #2DB843, #3ac88e, #5aa0e8, #3ac88e, #2DB843);
   background-size: 200% 100%;
   animation: glow-flow 4s linear infinite;
   filter: blur(14px);
   opacity: 0.3;
-  border-radius: 50%;
+  border-radius: 0;
   z-index: -1;
   pointer-events: none;
 }
@@ -435,7 +483,7 @@ input[type="range"]::-moz-range-thumb {
   border: 1.5px solid transparent;
   background:
     linear-gradient(to right, #f8fafc, #f8fafc) padding-box,
-    linear-gradient(135deg, #1934B5, #2DB843) border-box;
+    linear-gradient(135deg, #0E1A56, #2DB843) border-box;
   border-radius: 9999px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
@@ -453,7 +501,7 @@ input[type="range"]::-moz-range-thumb {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(90deg, #2DB843, #3ac88e, #5aa0e8, #1934B5, #5aa0e8, #3ac88e, #2DB843);
+  background: linear-gradient(90deg, #2DB843, #3ac88e, #5aa0e8, #0E1A56, #5aa0e8, #3ac88e, #2DB843);
   background-size: 300% 100%;
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -538,7 +586,7 @@ input[type="range"]::-moz-range-thumb {
 
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-outfit), 'Outfit', sans-serif;
+    font-family: 'Satoshi', system-ui, sans-serif;
     font-weight: 400;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
@@ -551,13 +599,13 @@ input[type="range"]::-moz-range-thumb {
 
   /* ─── Global heading typography ─── */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading), 'Montserrat', sans-serif;
+    font-family: 'Satoshi', system-ui, sans-serif;
     font-weight: 700;
     line-height: 1.08;
     letter-spacing: -0.025em;
   }
 
-  h1 { font-weight: 800; }
+  h1 { font-weight: 700; }
   h2 { font-weight: 700; }
   h3 { font-weight: 600; }
 
@@ -568,7 +616,7 @@ input[type="range"]::-moz-range-thumb {
 
   /* ─── Overline / label utility ─── */
   .text-overline {
-    font-family: var(--font-outfit), 'Outfit', sans-serif;
+    font-family: 'Satoshi', system-ui, sans-serif;
     font-size: 0.8125rem;
     font-weight: 600;
     letter-spacing: 0.18em;

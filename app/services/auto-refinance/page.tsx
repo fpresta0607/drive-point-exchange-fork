@@ -20,7 +20,7 @@ export default function Page() {
         `Seamless transition from your previous lender`,
         `Skip up to two payments during the transition`
       ]}
-      imageSrc="/auto/car-loan.jpg"
+      imageSrc="/auto/hero-auto-refinance-v2.webp"
     />
   );
 }

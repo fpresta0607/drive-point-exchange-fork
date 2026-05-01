@@ -2,13 +2,13 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import Navigation from './Navigation';
 import Footer from './Footer';
 import dynamic from 'next/dynamic';
 
 const ShaderBackground = dynamic(() => import('./ui/shader-background'), { ssr: false });
-import { CTAButton } from './ui/cta-button';
 
 interface ServiceLayoutProps {
   title: string;
@@ -41,8 +41,7 @@ export default function ServiceLayout({ title, description, features, imageSrc }
           initial="initial"
           animate="animate"
           variants={stagger}
-          className="w-full max-w-5xl bg-white rounded-2xl border border-dpe-green/30 shadow-2xl p-8 md:p-10"
-          style={{ boxShadow: '0 0 60px 10px rgba(45, 184, 67, 0.25), 0 0 120px 20px rgba(45, 184, 67, 0.1)' }}
+          className="w-full max-w-5xl bg-white border border-slate-200 shadow-2xl p-8 md:p-10"
         >
           {/* Title */}
           <motion.h1 variants={fadeIn} className="text-4xl md:text-5xl text-dpe-blue-800 mb-6">
@@ -68,7 +67,7 @@ export default function ServiceLayout({ title, description, features, imageSrc }
             {/* Right: features + buttons */}
             <div className="flex flex-col">
               {imageSrc && (
-                <motion.div variants={fadeIn} className="relative h-48 w-full rounded-xl overflow-hidden mb-4">
+                <motion.div variants={fadeIn} className="relative h-48 w-full overflow-hidden mb-4 border border-slate-200">
                   <Image src={imageSrc} alt={title} fill className="object-cover" />
                 </motion.div>
               )}
@@ -84,10 +83,23 @@ export default function ServiceLayout({ title, description, features, imageSrc }
                 ))}
               </motion.div>
 
-              <motion.div variants={fadeIn} className="flex mt-auto pt-4 border-t border-dpe-blue-800/10">
-                <CTAButton href="/contact" variant="primary-dark" size="lg">
+              <motion.div variants={fadeIn} className="flex mt-auto pt-4 border-t border-slate-200">
+                <Link
+                  href="/contact"
+                  className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-slate-950 text-white text-sm font-semibold tracking-wide hover:bg-slate-800 transition-colors"
+                >
                   Contact Us
-                </CTAButton>
+                  <svg
+                    className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                    aria-hidden
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                </Link>
               </motion.div>
             </div>
           </div>

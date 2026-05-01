@@ -3,12 +3,18 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { motion, useReducedMotion } from 'framer-motion';
 import Navigation from '../../components/Navigation';
-import LoanCalculator from '../../components/LoanCalculator';
 import HomeLoanCalculator from '../../components/HomeLoanCalculator';
 import Footer from '../../components/Footer';
 import { useI18n } from '../../lib/i18n/context';
+import { SectionKicker } from '../../components/ui/section-kicker';
+
+const AutoLoanRefinanceCalculator = dynamic(
+  () => import('../../components/ui/auto-loan-refinance-calculator').then(m => m.AutoLoanRefinanceCalculator),
+  { ssr: false }
+);
 
 function CalculatorContent() {
   const prefersReducedMotion = useReducedMotion();
@@ -41,78 +47,92 @@ function CalculatorContent() {
     <div className="min-h-screen">
       <Navigation overlay />
       
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+      {/* Hero — editorial dark, sharp */}
+      <section className="relative min-h-[55vh] flex items-end overflow-hidden pt-32 pb-16">
         <div className="absolute inset-0">
           <Image
-            src="/auto/car-loan3.jpg"
-            alt="Financial calculator tools"
+            src="/auto/hero-credit-calculator-v2.webp"
+            alt=""
             fill
             sizes="100vw"
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
+          <div className="absolute inset-0 bg-slate-950/60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/55 to-slate-950/30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-transparent to-slate-950/95" />
         </div>
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-36 z-10">
-          <motion.div
-            initial="initial"
-            animate="animate"
-            variants={staggerChildren}
-            className="text-center"
-          >
-            <motion.h1 variants={fadeInUp} className="text-5xl md:text-6xl font-bold text-white mb-6">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 w-full">
+          <motion.div initial="initial" animate="animate" variants={staggerChildren} className="max-w-3xl">
+            <motion.div variants={fadeInUp}>
+              <SectionKicker align="left" tone="white">
+                Calculators
+              </SectionKicker>
+            </motion.div>
+            <motion.h1
+              variants={fadeInUp}
+              className="text-5xl sm:text-6xl lg:text-7xl text-white font-bold tracking-[-0.025em] leading-[1.02] mb-5"
+            >
               {ts('calculator.page.title')}
             </motion.h1>
-            <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto">
+            <motion.p
+              variants={fadeInUp}
+              className="text-lg md:text-xl text-white/65 font-light max-w-xl leading-relaxed"
+            >
               {ts('calculator.page.subtitle')}
             </motion.p>
-            
-            {/* Calculator Type Selection */}
-            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-              <button
-                onClick={() => setCalculatorType('auto')}
-                className={`px-8 py-4 rounded-full font-semibold transition-all duration-200 ${
-                  calculatorType === 'auto'
-                    ? 'bg-dpe-navy text-white shadow-lg'
-                    : 'bg-white/20 text-white hover:bg-white/30'
-                }`}
-              >
-                {ts('navigation.autoLoanCalculator')}
-              </button>
-              <button
-                onClick={() => setCalculatorType('home')}
-                className={`px-8 py-4 rounded-full font-semibold transition-all duration-200 ${
-                  calculatorType === 'home'
-                    ? 'bg-dpe-navy text-white shadow-lg'
-                    : 'bg-white/20 text-white hover:bg-white/30'
-                }`}
-              >
-                {ts('navigation.homeLoanCalculator')}
-              </button>
-            </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Calculator Section */}
-      <section className="py-12 bg-dpe-gray-50">
+      {/* Calculator section — sharp segmented tabs + flat panel */}
+      <section className="py-20 bg-slate-50 border-t border-slate-200/70">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Sharp segmented switcher */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35 }}
+            className="inline-flex border border-slate-300 mb-10"
+          >
+            <button
+              type="button"
+              onClick={() => setCalculatorType('auto')}
+              className={`px-6 py-3 text-xs font-semibold uppercase tracking-[0.12em] transition-colors border-r border-slate-300 ${
+                calculatorType === 'auto'
+                  ? 'bg-slate-950 text-white'
+                  : 'bg-white text-slate-600 hover:text-slate-950 hover:bg-slate-100'
+              }`}
+            >
+              {ts('navigation.autoLoanCalculator')}
+            </button>
+            <button
+              type="button"
+              onClick={() => setCalculatorType('home')}
+              className={`px-6 py-3 text-xs font-semibold uppercase tracking-[0.12em] transition-colors ${
+                calculatorType === 'home'
+                  ? 'bg-slate-950 text-white'
+                  : 'bg-white text-slate-600 hover:text-slate-950 hover:bg-slate-100'
+              }`}
+            >
+              {ts('navigation.homeLoanCalculator')}
+            </button>
+          </motion.div>
+
           <motion.div
             initial="initial"
             whileInView="animate"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '-80px' }}
             variants={staggerChildren}
-            className="text-center mb-8"
+            className="max-w-3xl mb-10"
           >
-            <motion.h2 variants={fadeInUp} className="text-4xl text-dpe-gray-900 mb-4">
+            <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl text-slate-950 tracking-[-0.02em] leading-tight mb-3">
               {calculatorType === 'auto' ? ts('navigation.autoLoanCalculator') : ts('navigation.homeLoanCalculator')}
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl text-dpe-gray-600 max-w-3xl mx-auto">
-              {calculatorType === 'auto' 
+            <motion.p variants={fadeInUp} className="text-base md:text-lg text-slate-500 font-light leading-relaxed">
+              {calculatorType === 'auto'
                 ? ts('calculator.page.autoDescription')
-                : ts('calculator.page.homeDescription')
-              }
+                : ts('calculator.page.homeDescription')}
             </motion.p>
           </motion.div>
 
@@ -121,10 +141,10 @@ function CalculatorContent() {
             whileInView="animate"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="max-w-4xl mx-auto"
+            className={calculatorType === 'auto' ? 'w-full' : 'max-w-4xl'}
           >
             {calculatorType === 'auto' ? (
-              <LoanCalculator />
+              <AutoLoanRefinanceCalculator />
             ) : (
               <HomeLoanCalculator />
             )}

@@ -20,7 +20,7 @@ export default function Page() {
         `Negotiation assistance for outstanding debts`,
         `Long-term wealth building roadmaps`
       ]}
-      imageSrc="/auto/car-loan3.jpg"
+      imageSrc="/auto/hero-credit-calculator-v2.webp"
     />
   );
 }

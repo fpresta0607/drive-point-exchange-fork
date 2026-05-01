@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: "Auto Insurance Consulting - Optimize Your Coverage | Drive Point Exchange",
     description:
       "Expert auto insurance consulting. Policy audits, deductible optimization, multi-policy discounts, and direct connections to top-tier underwriters.",
-    images: [{ url: "/auto/svc-auto-insurance.jpg", width: 1200, height: 630, alt: "Auto insurance consulting" }],
+    images: [{ url: "/auto/hero-auto-insurance-v2.webp", width: 1200, height: 630, alt: "Auto insurance consulting" }],
   },
   twitter: {
     title: "Auto Insurance Consulting - Optimize Your Coverage",

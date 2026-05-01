@@ -30,13 +30,9 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-b from-[#0F1648] to-[#0A1340] text-white">
-      {/* Decorative top edge - blue glow line */}
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-dpe-blue/50 to-transparent" />
-
-      {/* Subtle background orbs */}
-      <div className="absolute top-12 left-1/4 w-72 h-72 bg-dpe-blue/[0.04] rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/6 w-56 h-56 bg-dpe-blue/[0.03] rounded-full blur-3xl pointer-events-none" />
+    <footer className="relative overflow-hidden bg-[#01040E] text-white border-t border-white/[0.08]">
+      {/* Decorative top edge - subtle navy glow line */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-dpe-blue/30 to-transparent" />
 
       {/* Main Footer Content */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">

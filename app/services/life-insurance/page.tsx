@@ -20,7 +20,7 @@ export default function Page() {
         `No-medical-exam approval options`,
         `Coverage calculation against major debts (mortgages)`
       ]}
-      imageSrc="/auto/svc-life-insurance.jpg"
+      imageSrc="/auto/hero-life-insurance-v2.webp"
     />
   );
 }

@@ -1,25 +1,18 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import { motion, useReducedMotion } from 'framer-motion';
 import Navigation from '../../components/Navigation';
 import Footer from '../../components/Footer';
 import { useI18n } from '../../lib/i18n/context';
 import { Sparkles, Shield, TrendingUp, HandCoins, Activity, Landmark, ArrowUpRight } from 'lucide-react';
-import { CTAButton } from '../../components/ui/cta-button';
-import Link from 'next/link';
-import dynamic from 'next/dynamic';
-
-const NebulaBg = dynamic(
-  () => import('../../components/ui/nebula-bg').then(m => ({ default: m.NebulaBg })),
-  { ssr: false }
-);
+import { SectionKicker } from '../../components/ui/section-kicker';
 
 export default function ServicesHub() {
   const { ts } = useI18n();
   const prefersReducedMotion = useReducedMotion();
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const containerVariants = prefersReducedMotion
     ? { animate: {} }
@@ -33,154 +26,212 @@ export default function ServicesHub() {
     {
       title: ts('home.services.autoRefinance.title'),
       description: ts('home.services.autoRefinance.description'),
-      icon: <Activity className="w-6 h-6 md:w-8 md:h-8 text-dpe-green group-hover:text-white transition-colors duration-500" />,
-      image: "/auto/car-loan.jpg",
+      icon: <Activity className="w-5 h-5" />,
+      image: "/auto/hero-auto-refinance-v2.webp",
       href: "/services/auto-refinance",
       category: ts('services.hub.categories.autoRefinance'),
-      accent: "from-emerald-500 to-teal-700",
     },
     {
       title: ts('home.services.vehicleCoverage.title'),
       description: ts('home.services.vehicleCoverage.description'),
-      icon: <Shield className="w-6 h-6 md:w-8 md:h-8 text-dpe-green group-hover:text-white transition-colors duration-500" />,
-      image: "/auto/porsche-garage.jpg",
+      icon: <Shield className="w-5 h-5" />,
+      image: "/auto/hero-vehicle-coverage-v2.webp",
       href: "/services/vehicle-coverage",
       category: ts('services.hub.categories.coverage'),
-      accent: "from-blue-500 to-indigo-700",
     },
     {
       title: ts('home.services.homeRefinance.title'),
       description: ts('home.services.homeRefinance.description'),
-      icon: <Landmark className="w-6 h-6 md:w-8 md:h-8 text-dpe-green group-hover:text-white transition-colors duration-500" />,
-      image: "/auto/svc-home-refinance.jpg",
+      icon: <Landmark className="w-5 h-5" />,
+      image: "/auto/hero-home-refinance-v2.webp",
       href: "/services/home-refinance",
       category: ts('services.hub.categories.homeLoans'),
-      accent: "from-purple-500 to-fuchsia-700",
     },
     {
       title: ts('home.services.insuranceConsultation.title'),
       description: ts('home.services.insuranceConsultation.description'),
-      icon: <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-dpe-green group-hover:text-white transition-colors duration-500" />,
-      image: "/auto/svc-auto-insurance.jpg",
+      icon: <Sparkles className="w-5 h-5" />,
+      image: "/auto/hero-auto-insurance-v2.webp",
       href: "/services/auto-insurance",
       category: ts('services.hub.categories.consulting'),
-      accent: "from-amber-500 to-orange-700",
     },
     {
       title: ts('home.services.lifeInsurance.title'),
       description: ts('home.services.lifeInsurance.description'),
-      icon: <HandCoins className="w-6 h-6 md:w-8 md:h-8 text-dpe-green group-hover:text-white transition-colors duration-500" />,
-      image: "/auto/svc-life-insurance.jpg",
+      icon: <HandCoins className="w-5 h-5" />,
+      image: "/auto/hero-life-insurance-v2.webp",
       href: "/services/life-insurance",
       category: ts('services.hub.categories.consulting'),
-      accent: "from-rose-500 to-red-700",
     },
     {
       title: ts('home.services.creditSavings.title'),
       description: ts('home.services.creditSavings.description'),
-      icon: <TrendingUp className="w-6 h-6 md:w-8 md:h-8 text-dpe-green group-hover:text-white transition-colors duration-500" />,
-      image: "/auto/car-loan3.jpg",
+      icon: <TrendingUp className="w-5 h-5" />,
+      image: "/auto/hero-credit-calculator-v2.webp",
       href: "/services/credit-consultations",
       category: ts('services.hub.categories.financial'),
-      accent: "from-cyan-500 to-blue-700",
-    }
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-[#020720] selection:bg-dpe-green/30 selection:text-white">
+    <div className="min-h-screen bg-white selection:bg-dpe-green/30 selection:text-white">
       <Navigation overlay />
-      
-      {/* ─── PREMIUM HERO SECTION ─── */}
-      <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden">
-        {/* Nebula Shader Background */}
-        <NebulaBg />
 
-        {/* Bottom fade into page background */}
-        <div className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none z-[5]" style={{ background: 'linear-gradient(to bottom, transparent, #020720)' }} />
+      {/* ─── HERO ─── editorial dark, sharp */}
+      <section className="relative min-h-[80vh] flex items-end overflow-hidden pt-32 pb-20 bg-slate-950">
+        {/* Background — soft architectural image + scrims */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Image
+            src="/auto/hero-services-page.webp"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-slate-950/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/35 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-950/85" />
+          <div className="absolute top-1/3 right-[-10%] w-[640px] h-[640px] bg-dpe-blue/15 rounded-full blur-[160px] mix-blend-screen" />
+          <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-dpe-green/12 rounded-full blur-[140px] mix-blend-screen" />
+          {/* Hairline grid */}
+          <div
+            className="absolute inset-0 opacity-[0.05] mix-blend-overlay"
+            style={{
+              backgroundImage:
+                'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
+              backgroundSize: '120px 120px',
+            }}
+          />
+        </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center text-center mt-20">
-          <motion.div initial="initial" animate="animate" variants={containerVariants} className="max-w-4xl">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <motion.div initial="initial" animate="animate" variants={containerVariants} className="max-w-3xl">
+            <motion.div variants={itemVariants}>
+              <SectionKicker align="left" tone="white">
+                Services · Nationwide
+              </SectionKicker>
+            </motion.div>
 
-            <motion.h1 variants={itemVariants} className="text-6xl sm:text-7xl md:text-[8rem] text-white mb-8 leading-[0.92]">
-              {ts('services.hub.heroTitle1')} <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500">
-                {ts('services.hub.heroTitle2')}
-              </span>
+            <motion.h1
+              variants={itemVariants}
+              className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] text-white font-bold tracking-[-0.03em] leading-[0.98] mb-7"
+            >
+              {ts('services.hub.heroTitle1')}<br />
+              <span className="text-white">{ts('services.hub.heroTitle2')}</span>
             </motion.h1>
 
-            <motion.p variants={itemVariants} className="text-lg md:text-xl text-gray-400 font-light max-w-2xl mx-auto leading-relaxed">
+            <motion.p
+              variants={itemVariants}
+              className="text-lg md:text-xl text-white/65 font-light max-w-xl leading-relaxed mb-10"
+            >
               {ts('services.hub.heroSubtitle')}
             </motion.p>
+
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3">
+              <Link
+                href="/contact"
+                className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-white text-slate-950 text-sm font-semibold tracking-wide hover:bg-white/90 transition-colors"
+              >
+                {ts('services.hub.ctaButton')}
+                <svg
+                  className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  viewBox="0 0 24 24"
+                  aria-hidden
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link
+                href="/calculator?type=auto"
+                className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/15 text-white text-sm font-medium hover:bg-white/[0.04] hover:border-white/30 transition-colors"
+              >
+                Calculate savings
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* ─── DYNAMIC BENTO ARCHITECTURE ─── */}
-      <section className="py-32 relative z-20">
+      {/* ─── SERVICES GRID ─── sharp hairline cards */}
+      <section className="py-28 bg-slate-50 border-y border-slate-200/70">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section header */}
           <motion.div
             initial="initial"
             whileInView="animate"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-80px' }}
             variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="max-w-2xl mb-14"
           >
-            {servicesList.map((service, index) => (
-              <motion.div
-                key={service.title}
-                variants={itemVariants}
-              >
+            <motion.div variants={itemVariants}>
+              <SectionKicker align="left" tone="green">
+                What we offer
+              </SectionKicker>
+            </motion.div>
+            <motion.h2
+              variants={itemVariants}
+              className="text-4xl sm:text-5xl lg:text-6xl text-slate-950 tracking-[-0.025em] leading-[1.02]"
+            >
+              Six services. <span className="text-dpe-blue">One nationwide partner.</span>
+            </motion.h2>
+          </motion.div>
+
+          {/* Sharp grid */}
+          <motion.div
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={containerVariants}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-200"
+          >
+            {servicesList.map((service) => (
+              <motion.div key={service.title} variants={itemVariants}>
                 <Link
                   href={service.href}
-                  className="group block w-full h-[400px] relative rounded-[2rem] overflow-hidden border border-white/[0.08] hover:border-white/20 transition-colors duration-500"
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
+                  className="group relative block h-[420px] bg-white overflow-hidden"
                 >
-                  {/* Background Image that fades in on hover */}
-                  <div className="absolute inset-0 w-full h-full">
+                  {/* Image fills the card */}
+                  <div className="absolute inset-0">
                     <Image
                       src={service.image}
                       alt={service.title}
                       fill
-                      className="object-cover scale-100 group-hover:scale-110 transition-transform duration-[1500ms] ease-out"
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
                     />
-                    {/* Glassmorphism Dark Overlay */}
-                    <div className="absolute inset-0 bg-[#050928]/85 group-hover:bg-black/50 transition-colors duration-700 backdrop-blur-[2px] group-hover:backdrop-blur-0" />
-                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-40 bg-gradient-to-tr ${service.accent} mix-blend-overlay transition-opacity duration-700`} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/60 to-slate-950/20 transition-opacity duration-500" />
+                    <div className="absolute inset-0 bg-slate-950/0 group-hover:bg-slate-950/15 transition-colors duration-500" />
                   </div>
 
-                  {/* Content Container */}
-                  <div className="relative h-full flex flex-col justify-between p-7 md:p-8 z-10">
-                    {/* Header row with Icon and Label */}
-                    <div className="flex justify-between items-start">
-                      <div className="p-3 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 group-hover:bg-white/20 transition-colors duration-500 group-hover:-translate-y-1 transform">
+                  {/* Content */}
+                  <div className="relative h-full flex flex-col justify-between p-7 z-10">
+                    {/* Top row */}
+                    <div className="flex items-start justify-between">
+                      <div className="inline-flex items-center justify-center w-10 h-10 border border-white/20 bg-white/[0.06] backdrop-blur-sm text-white/90">
                         {service.icon}
                       </div>
-                      <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-white/50 group-hover:text-white/90 transition-colors bg-white/5 px-3 py-1 rounded-full border border-white/5">
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55 border-l border-white/15 pl-3">
                         {service.category}
                       </span>
                     </div>
 
-                    {/* Body Content */}
-                    <div className="transform translate-y-2 group-hover:translate-y-0 transition-all duration-500 ease-out">
-                      <h3 className="text-2xl md:text-3xl text-white mb-3 drop-shadow-md">
+                    {/* Bottom content */}
+                    <div>
+                      <h3 className="text-2xl md:text-3xl text-white font-bold tracking-[-0.02em] leading-[1.05] mb-3">
                         {service.title}
                       </h3>
-                      <AnimatePresence>
-                        <motion.p
-                          initial={{ opacity: 0.6, height: 'auto' }}
-                          animate={{ opacity: hoveredIndex === index ? 1 : 0.6 }}
-                          className="text-gray-300/80 text-sm sm:text-base leading-relaxed line-clamp-2 md:line-clamp-3 group-hover:text-white"
-                        >
-                          {service.description}
-                        </motion.p>
-                      </AnimatePresence>
-                      <div className="flex items-center gap-2 mt-4 text-white/40 group-hover:text-white/80 transition-colors duration-500">
-                        <span className="tracking-wide uppercase text-xs font-medium">{ts('services.learnMore')}</span>
-                        <ArrowUpRight className="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                      <p className="text-white/65 text-sm leading-relaxed line-clamp-2 font-light mb-5">
+                        {service.description}
+                      </p>
+                      <div className="inline-flex items-center gap-2 text-white text-xs font-semibold uppercase tracking-[0.14em] border-t border-white/15 pt-4 transition-colors duration-300 group-hover:text-dpe-green">
+                        <span>{ts('services.learnMore')}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
                       </div>
                     </div>
-
                   </div>
                 </Link>
               </motion.div>
@@ -189,36 +240,81 @@ export default function ServicesHub() {
         </div>
       </section>
 
-      {/* ─── IMMERSIVE CTA ─── */}
-      <section className="relative py-32 overflow-hidden border-t border-white/5">
-         <div className="absolute inset-0 bg-[#020720]">
-             <div className="absolute inset-0 bg-[url('/auto/car-hero.jpg')] bg-cover bg-center opacity-[0.15] mix-blend-luminosity" />
-             <div className="absolute inset-0 bg-gradient-to-t from-[#020720] via-transparent to-[#020720]" />
-         </div>
-         
-         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              variants={containerVariants}
-            >
-              <motion.h2 variants={itemVariants} className="text-5xl md:text-7xl text-white mb-6">
+      {/* ─── CTA ─── editorial close, brand accent on word */}
+      <section className="py-28 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={containerVariants}
+            className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-20 items-end"
+          >
+            <div>
+              <motion.div variants={itemVariants}>
+                <SectionKicker align="left" tone="green">
+                  Ready when you are
+                </SectionKicker>
+              </motion.div>
+              <motion.h2
+                variants={itemVariants}
+                className="text-4xl sm:text-5xl lg:text-6xl text-slate-950 mb-6 tracking-[-0.025em] leading-[1.02]"
+              >
                 {ts('services.hub.ctaTitle1')} <span className="text-dpe-green">{ts('services.hub.ctaTitle2')}</span>
               </motion.h2>
-              <motion.p variants={itemVariants} className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto font-light">
+              <motion.p
+                variants={itemVariants}
+                className="text-lg text-slate-500 font-light leading-relaxed mb-9 max-w-xl"
+              >
                 {ts('services.hub.ctaSubtitle')}
               </motion.p>
-
-              <motion.div variants={itemVariants} className="flex justify-center">
-                <CTAButton href="/contact" size="lg" showArrow variant="hero">
+              <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3">
+                <Link
+                  href="/contact"
+                  className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-slate-950 text-white text-sm font-semibold tracking-wide hover:bg-slate-800 transition-colors"
+                >
                   {ts('services.hub.ctaButton')}
-                </CTAButton>
+                  <svg
+                    className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                    aria-hidden
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                </Link>
+                <Link
+                  href="/benefits"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 border border-slate-300 text-slate-700 text-sm font-medium hover:border-slate-950 hover:text-slate-950 transition-colors"
+                >
+                  See coverage benefits
+                </Link>
               </motion.div>
+            </div>
+
+            <motion.div
+              variants={itemVariants}
+              className="border-l border-slate-200 pl-8 py-2 lg:py-6"
+            >
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400 mb-2">
+                Speak with a specialist
+              </p>
+              <a
+                href="tel:+18883510782"
+                className="text-3xl lg:text-4xl font-bold text-slate-950 hover:text-dpe-green transition-colors tracking-[-0.02em]"
+              >
+                (888) 351-0782
+              </a>
+              <p className="text-sm text-slate-500 font-light mt-3 leading-relaxed">
+                Nationwide auto financing — no obligations, no fees.
+              </p>
             </motion.div>
-         </div>
+          </motion.div>
+        </div>
       </section>
-      
+
       <Footer />
     </div>
   );

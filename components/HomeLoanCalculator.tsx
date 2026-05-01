@@ -149,7 +149,7 @@ export default function HomeLoanCalculator() {
   ];
 
   return (
-    <div className="bg-white rounded-2xl shadow-2xl p-8 border border-dpe-gray-100">
+    <div className="bg-white shadow-2xl p-8 border border-dpe-gray-100">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left Column - Inputs */}
         <motion.div
@@ -184,7 +184,7 @@ export default function HomeLoanCalculator() {
           />
 
           {/* Down Payment Percentage Display */}
-          <div className="bg-dpe-blue-50 p-4 rounded-lg">
+          <div className="bg-dpe-blue-50 p-4">
             <p className="text-sm text-dpe-gray-600">
               {ts('homeLoanCalculator.downPayment')}: <span className="font-semibold text-dpe-blue">{downPaymentPercent.toFixed(1)}%</span>
             </p>
@@ -248,7 +248,7 @@ export default function HomeLoanCalculator() {
           <h3 className="text-2xl font-bold text-dpe-gray-900 mb-6">{ts('homeLoanCalculator.paymentBreakdownTitle')}</h3>
           
           {/* Monthly Payment */}
-          <div className="bg-gradient-to-br from-dpe-navy to-dpe-navy-deep rounded-xl p-6 text-white">
+          <div className="bg-gradient-to-br from-dpe-navy to-dpe-navy-deep p-6 text-white">
             <div className="text-center">
               <p className="text-dpe-blue-100 text-sm font-medium mb-2">{ts('homeLoanCalculator.estimatedMonthlyPayment')}</p>
               <p className="text-4xl font-bold">${Math.round(monthlyPayment).toLocaleString()}</p>
@@ -278,7 +278,7 @@ export default function HomeLoanCalculator() {
           </div>
 
           {/* Loan Summary */}
-          <div className="bg-dpe-gray-50 rounded-lg p-4 space-y-2">
+          <div className="bg-dpe-gray-50 p-4 space-y-2">
             <div className="flex justify-between">
               <span className="text-dpe-gray-600">{ts('homeLoanCalculator.paymentBreakdown.loanAmount')}</span>
               <span className="font-semibold">${loanAmount.toLocaleString()}</span>

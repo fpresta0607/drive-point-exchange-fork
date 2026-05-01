@@ -12,19 +12,19 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-dpe-navy text-white font-semibold hover:bg-dpe-navy-deep transition-colors"
+            className="inline-flex items-center justify-center px-6 py-3 bg-slate-950 text-white font-semibold hover:bg-slate-800 transition-colors"
           >
             Return Home
           </Link>
           <Link
             href="/services"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-dpe-navy text-dpe-navy font-semibold hover:bg-dpe-navy hover:text-white transition-colors"
+            className="inline-flex items-center justify-center px-6 py-3 border border-slate-950 text-slate-950 font-semibold hover:bg-slate-950 hover:text-white transition-colors"
           >
             View Services
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-dpe-blue text-dpe-blue font-semibold hover:bg-dpe-blue hover:text-white transition-colors"
+            className="inline-flex items-center justify-center px-6 py-3 border border-slate-300 text-slate-700 font-semibold hover:border-slate-950 hover:text-slate-950 transition-colors"
           >
             Contact Us
           </Link>

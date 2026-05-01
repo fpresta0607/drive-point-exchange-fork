@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     description: "Contact Drive Point Exchange for personalized auto financing assistance. Call (888) 351-0782 for expert advice. Nationwide service.",
     images: [
       {
-        url: "/auto/car-loan3.jpg",
+        url: "/auto/hero-credit-calculator-v2.webp",
         width: 1200,
         height: 630,
         alt: "Contact us for auto financing",

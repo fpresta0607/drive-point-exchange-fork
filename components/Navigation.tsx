@@ -4,15 +4,22 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionTemplate,
+  useMotionValueEvent,
+} from 'framer-motion';
 import { useI18n } from '../lib/i18n/context';
-import { NavHeader, type NavTab } from './ui/nav-header';
+import { NavHeader } from './ui/nav-header';
 
 export default function Navigation({ overlay = false }: { overlay?: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(!overlay);
   const { ts, language, setLanguage, languages } = useI18n();
   const pathname = usePathname();
 
@@ -20,20 +27,44 @@ export default function Navigation({ overlay = false }: { overlay?: boolean }) {
   const calculatorRef = useRef<HTMLElement>(null);
   const languageRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const { scrollY } = useScroll();
+
+  const bgOpacity = useTransform(
+    scrollY,
+    [0, 80],
+    overlay ? [0, 0.95] : [0.95, 0.95]
+  );
+  const blurPx = useTransform(
+    scrollY,
+    [0, 80],
+    overlay ? [0, 16] : [16, 16]
+  );
+  const shadowAlpha = useTransform(
+    scrollY,
+    [0, 80],
+    overlay ? [0, 0.06] : [0.06, 0.06]
+  );
+  const lightLogoOpacity = useTransform(
+    scrollY,
+    [0, 80],
+    overlay ? [1, 0] : [0, 0]
+  );
+  const darkLogoOpacity = useTransform(
+    scrollY,
+    [0, 80],
+    overlay ? [0, 1] : [1, 1]
+  );
+
+  const backgroundColor = useMotionTemplate`rgba(255, 255, 255, ${bgOpacity})`;
+  const backdropFilter = useMotionTemplate`blur(${blurPx}px)`;
+  const boxShadow = useMotionTemplate`0 1px 8px rgba(0, 0, 0, ${shadowAlpha})`;
+
+  // Boolean for child link color switching — driven by the same motion value, flips at midpoint
+  useMotionValueEvent(scrollY, 'change', (latest) => {
     if (!overlay) return;
-    let ticking = false;
-    const handleScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        setIsScrolled(window.scrollY > 50);
-        ticking = false;
-      });
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [overlay]);
+    const next = latest > 40;
+    if (next !== isScrolled) setIsScrolled(next);
+  });
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -83,27 +114,40 @@ export default function Navigation({ overlay = false }: { overlay?: boolean }) {
   const currentLanguage = languages.find(lang => lang.code === language);
 
   return (
-    <nav className={`${overlay ? 'fixed' : 'sticky'} top-0 left-0 right-0 z-50 transition-[background-color,box-shadow,border-color] duration-200 ease-out ${isTransparent
-        ? 'bg-gradient-to-b from-black/40 to-transparent border-b-0 shadow-none pb-8 -mb-8'
-        : 'bg-white/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.06)]'
-      }`}>
+    <motion.nav
+      style={{
+        backgroundColor,
+        backdropFilter,
+        WebkitBackdropFilter: backdropFilter as unknown as string,
+        boxShadow,
+        willChange: 'background-color, backdrop-filter',
+      }}
+      className={`${overlay ? 'fixed' : 'sticky'} top-0 left-0 right-0 z-50`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-20">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-3">
-              <Image
-                src={isTransparent ? "/logo-no bg-inverted.png" : "/logo-no bg.png"}
-                alt="Drive Point Exchange Logo"
-                width={200}
-                height={80}
-                className={`h-20 w-auto ${isTransparent ? '' : 'mix-blend-multiply'}`}
-                priority
-              />
+          {/* Logo — two stacked images cross-fading via motion values */}
+          <div className="flex-shrink-0 relative">
+            <Link href="/" className="relative flex items-center" aria-label="Drive Point Exchange home">
+              <div className="relative h-20 w-[200px]">
+                <motion.div style={{ opacity: lightLogoOpacity }} className="absolute inset-0">
+                  <Image
+                    src="/logo-no bg-inverted.png"
+                    alt="Drive Point Exchange"
+                    fill
+                    sizes="200px"
+                    className="object-contain object-left"
+                    priority
+                  />
+                </motion.div>
+                <motion.div style={{ opacity: darkLogoOpacity }} className="absolute inset-0">
+                  <div className="absolute inset-0 bg-slate-950 logo-mask-dark" aria-hidden />
+                </motion.div>
+              </div>
             </Link>
           </div>
 
-          {/* Desktop Navigation - Page Centered */}
+          {/* Desktop Navigation */}
           <div className="hidden md:flex absolute left-1/2 -translate-x-1/2">
             <NavHeader
               isTransparent={isTransparent}
@@ -120,12 +164,12 @@ export default function Navigation({ overlay = false }: { overlay?: boolean }) {
                   isActive: pathname.startsWith('/services'),
                   wrapperRef: servicesRef as React.RefObject<HTMLLIElement | null>,
                   dropdownContent: isServicesOpen ? (
-                    <div className="w-60 bg-white rounded-md shadow-lg py-1 border border-gray-200">
+                    <div className="w-60 bg-white shadow-lg py-1 border border-gray-200">
                       {serviceItems.map((item, index) => (
                         <Link
                           key={item.href}
                           href={item.href}
-                          className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-dpe-blue transition-colors ${index === 0 ? 'font-bold border-b border-gray-100 pb-2 mb-1' : ''}`}
+                          className={`block px-4 py-2 text-sm text-gray-700 hover:bg-slate-900 hover:text-white transition-colors ${index === 0 ? 'font-bold border-b border-gray-100 pb-2 mb-1' : ''}`}
                           onClick={() => setIsServicesOpen(false)}
                         >
                           {item.label}
@@ -151,12 +195,12 @@ export default function Navigation({ overlay = false }: { overlay?: boolean }) {
                   isActive: pathname === '/calculator',
                   wrapperRef: calculatorRef as React.RefObject<HTMLLIElement | null>,
                   dropdownContent: isCalculatorOpen ? (
-                    <div className="w-48 bg-white rounded-md shadow-lg py-1 border border-gray-200">
+                    <div className="w-48 bg-white shadow-lg py-1 border border-gray-200">
                       {calculatorItems.map((item) => (
                         <Link
                           key={item.href}
                           href={item.href}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-dpe-blue transition-colors"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-slate-900 hover:text-white transition-colors"
                           onClick={() => setIsCalculatorOpen(false)}
                         >
                           {item.label}
@@ -179,7 +223,7 @@ export default function Navigation({ overlay = false }: { overlay?: boolean }) {
                 onKeyDown={(e) => handleDropdownKeyDown(e, () => setIsLanguageOpen(false))}
                 aria-expanded={isLanguageOpen}
                 aria-haspopup="true"
-                className={`${isTransparent ? 'text-gray-500 hover:text-gray-700' : 'text-gray-500 hover:text-dpe-blue'} px-3 py-2 text-sm font-medium transition-colors flex items-center`}
+                className={`${isTransparent ? 'text-white/70 hover:text-white' : 'text-slate-600 hover:text-slate-900'} px-3 py-2 text-sm font-medium transition-colors flex items-center`}
               >
                 <span className="mr-2">{currentLanguage?.flag}</span>
                 <span className="hidden sm:inline">{currentLanguage?.nativeName}</span>
@@ -189,7 +233,7 @@ export default function Navigation({ overlay = false }: { overlay?: boolean }) {
               </button>
 
               {isLanguageOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
+                <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg py-1 z-50 border border-gray-200">
                   {languages.map((lang) => (
                     <button
                       type="button"
@@ -199,14 +243,14 @@ export default function Navigation({ overlay = false }: { overlay?: boolean }) {
                         setIsLanguageOpen(false);
                       }}
                       className={`w-full text-left px-4 py-2 text-sm transition-colors flex items-center ${language === lang.code
-                          ? 'bg-blue-50 text-dpe-blue'
-                          : 'text-gray-700 hover:bg-gray-100'
+                          ? 'bg-slate-100 text-slate-900 font-semibold'
+                          : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                         }`}
                     >
                       <span className="mr-3">{lang.flag}</span>
                       <span>{lang.nativeName}</span>
                       {language === lang.code && (
-                        <svg className="ml-auto h-4 w-4 text-dpe-blue" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="ml-auto h-4 w-4 text-slate-900" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                       )}
@@ -216,14 +260,14 @@ export default function Navigation({ overlay = false }: { overlay?: boolean }) {
               )}
             </div>
 
-            {/* Phone Numbers */}
+            {/* Phone */}
             <div className="flex items-center gap-1">
               <a
                 href="tel:+18883510782"
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium transition-all ${
                   isTransparent
-                    ? 'text-gray-500 hover:text-gray-700 hover:bg-gray-100/50'
-                    : 'text-gray-600 hover:text-dpe-blue hover:bg-dpe-blue/5'
+                    ? 'text-white/70 hover:text-white hover:bg-white/[0.06]'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                 }`}
                 aria-label="Call (888) 351-0782"
               >
@@ -237,20 +281,23 @@ export default function Navigation({ overlay = false }: { overlay?: boolean }) {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2 ml-auto">
-            {/* Mobile Phone Button */}
             <a
               href="tel:+18883510782"
-              className="flex items-center justify-center text-white bg-dpe-green hover:bg-dpe-green-600 p-2.5 rounded-lg transition-colors"
+              className={`flex items-center justify-center p-2.5 border transition-colors ${
+                isTransparent
+                  ? 'text-white border-white/20 hover:bg-white/[0.06]'
+                  : 'text-slate-700 border-slate-300 hover:border-slate-900 hover:text-slate-900'
+              }`}
               aria-label="Call us"
             >
-              <svg className="h-6 w-6" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="h-5 w-5" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
             </a>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-expanded={isMenuOpen}
-              className={`text-gray-600 hover:text-dpe-blue inline-flex items-center justify-center p-3 rounded-md transition-colors`}
+              className={`${isTransparent ? 'text-white/80 hover:text-white' : 'text-slate-600 hover:text-slate-900'} inline-flex items-center justify-center p-3 transition-colors`}
               aria-label="Toggle mobile menu"
             >
               <svg
@@ -281,23 +328,22 @@ export default function Navigation({ overlay = false }: { overlay?: boolean }) {
       {/* Mobile Navigation */}
       {isMenuOpen && (
         <div className="md:hidden overflow-hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/90 backdrop-blur-xl">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-xl">
             <Link
               href={navItems[0].href}
-              className="text-gray-500 hover:text-dpe-blue hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-normal transition-colors"
+              className="text-gray-500 hover:text-slate-900 hover:bg-gray-50 block px-3 py-2 text-base font-normal transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               {navItems[0].label}
             </Link>
 
-            {/* Mobile Services Options */}
             <div className="px-3 py-2">
               <div className="text-gray-500 text-sm font-medium mb-2">{ts('navigation.services')}</div>
               {serviceItems.map((item, index) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`text-gray-600 hover:text-dpe-blue hover:bg-gray-100 block px-3 py-2 rounded-md text-base transition-colors ml-4 ${index === 0 ? 'font-bold' : 'font-medium'}`}
+                  className={`text-gray-600 hover:text-slate-900 hover:bg-gray-100 block px-3 py-2 text-base transition-colors ml-4 ${index === 0 ? 'font-bold' : 'font-medium'}`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
@@ -309,21 +355,20 @@ export default function Navigation({ overlay = false }: { overlay?: boolean }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-500 hover:text-dpe-blue hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-normal transition-colors"
+                className="text-gray-500 hover:text-slate-900 hover:bg-gray-50 block px-3 py-2 text-base font-normal transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}
               </Link>
             ))}
 
-            {/* Mobile Calculator Options */}
             <div className="px-3 py-2">
               <div className="text-gray-500 text-sm font-medium mb-2">{ts('navigation.calculators')}</div>
               {calculatorItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-gray-500 hover:text-dpe-blue hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-normal transition-colors ml-4"
+                  className="text-gray-500 hover:text-slate-900 hover:bg-gray-50 block px-3 py-2 text-base font-normal transition-colors ml-4"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
@@ -331,7 +376,6 @@ export default function Navigation({ overlay = false }: { overlay?: boolean }) {
               ))}
             </div>
 
-            {/* Mobile Language Options */}
             <div className="px-3 py-2">
               <div className="text-gray-500 text-sm font-medium mb-2">{ts('navigation.language')}</div>
               {languages.map((lang) => (
@@ -341,15 +385,15 @@ export default function Navigation({ overlay = false }: { overlay?: boolean }) {
                     setLanguage(lang.code);
                     setIsMenuOpen(false);
                   }}
-                  className={`w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors ml-4 flex items-center ${language === lang.code
-                      ? 'bg-blue-50 text-dpe-blue'
-                      : 'text-gray-600 hover:text-dpe-blue hover:bg-gray-100'
+                  className={`w-full text-left px-3 py-2 text-base font-medium transition-colors ml-4 flex items-center ${language === lang.code
+                      ? 'bg-slate-100 text-slate-900 font-semibold'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                     }`}
                 >
                   <span className="mr-3">{lang.flag}</span>
                   <span>{lang.nativeName}</span>
                   {language === lang.code && (
-                    <svg className="ml-auto h-4 w-4 text-dpe-blue" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="ml-auto h-4 w-4 text-slate-900" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   )}
@@ -359,6 +403,6 @@ export default function Navigation({ overlay = false }: { overlay?: boolean }) {
           </div>
         </div>
       )}
-    </nav>
+    </motion.nav>
   );
 }

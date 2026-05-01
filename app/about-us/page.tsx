@@ -107,13 +107,13 @@ export default function AboutUs() {
             >
               <Link
                 href="/calculator"
-                className="bg-dpe-navy hover:bg-dpe-navy-deep text-white font-semibold py-4 px-8 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200"
+                className="bg-slate-950 hover:bg-slate-800 text-white font-semibold py-4 px-8 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200"
               >
                 {ts('about.hero.getQuote')}
               </Link>
               <Link
                 href="/contact"
-                className="bg-dpe-navy hover:bg-dpe-navy-deep text-white font-semibold py-4 px-8 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200"
+                className="bg-slate-950 hover:bg-slate-800 text-white font-semibold py-4 px-8 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200"
               >
                 {ts('about.hero.contactTeam')}
               </Link>
@@ -331,13 +331,13 @@ export default function AboutUs() {
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/calculator"
-                className="bg-white text-dpe-navy hover:bg-dpe-navy-deep hover:text-white font-semibold py-4 px-8 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200"
+                className="bg-white text-slate-950 hover:bg-slate-100 hover:text-slate-950 font-semibold py-4 px-8 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200"
               >
                 {ts('about.cta.getQuote')}
               </Link>
               <Link
                 href="/contact"
-                className="bg-dpe-navy hover:bg-dpe-navy-deep text-white font-semibold py-4 px-8 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200"
+                className="bg-slate-950 hover:bg-slate-800 text-white font-semibold py-4 px-8 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200"
               >
                 {ts('about.cta.contactTeam')}
               </Link>

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: "Vehicle Coverage & Certifications | Drive Point Exchange",
     description:
       "Authentic vehicle coverage and certifications. Comprehensive roadside assistance, zero-deductible options, rental car reimbursement.",
-    images: [{ url: "/auto/porsche-garage.jpg", width: 1200, height: 630, alt: "Vehicle coverage and protection services" }],
+    images: [{ url: "/auto/hero-vehicle-coverage-v2.webp", width: 1200, height: 630, alt: "Vehicle coverage and protection services" }],
   },
   twitter: {
     title: "Vehicle Coverage & Certifications - Verified Protection",

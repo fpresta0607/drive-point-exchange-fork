@@ -37,7 +37,7 @@ function CcpaOptOutButton() {
     <button
       type="button"
       onClick={handleOptOut}
-      className="mt-4 px-6 py-3 rounded-xl bg-dpe-navy text-white font-semibold text-sm hover:bg-dpe-navy-deep transition-colors"
+      className="mt-4 px-6 py-3 bg-slate-950 text-white font-semibold text-sm hover:bg-slate-800 transition-colors"
     >
       Opt Out of Data Sharing
     </button>

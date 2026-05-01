@@ -4,11 +4,13 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
+import { Phone, Mail, Globe, CheckCircle2 } from 'lucide-react';
 import Navigation from '../../components/Navigation';
 import Footer from '../../components/Footer';
 import { trackLeadSubmitted } from '../../lib/gtm';
 import { useI18n } from '../../lib/i18n/context';
 import { CTAButton } from '../../components/ui/cta-button';
+import { SectionKicker } from '../../components/ui/section-kicker';
 
 export default function Contact() {
   const prefersReducedMotion = useReducedMotion();
@@ -137,41 +139,81 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white selection:bg-dpe-blue/30 selection:text-white">
       <Navigation overlay />
-      
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
+
+      {/* ─── HERO ─── editorial dark, sharp (matches services/benefits) */}
+      <section className="relative min-h-[75vh] flex items-end overflow-hidden pt-32 pb-20 bg-slate-950">
+        <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
             src="/auto/real-hero-v1.png"
-            alt="Contact us for auto financing"
+            alt=""
             fill
             sizes="100vw"
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
+          <div className="absolute inset-0 bg-slate-950/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/35 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-950/85" />
+          <div className="absolute top-1/3 right-[-10%] w-[640px] h-[640px] bg-dpe-blue/15 rounded-full blur-[160px] mix-blend-screen" />
+          <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-dpe-green/12 rounded-full blur-[140px] mix-blend-screen" />
+          <div
+            className="absolute inset-0 opacity-[0.05] mix-blend-overlay"
+            style={{
+              backgroundImage:
+                'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
+              backgroundSize: '120px 120px',
+            }}
+          />
         </div>
-        
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24 md:pt-20">
-          <motion.div
-            initial="initial"
-            animate="animate"
-            variants={staggerChildren}
-          >
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <motion.div initial="initial" animate="animate" variants={staggerChildren} className="max-w-3xl">
+            <motion.div variants={fadeInUp}>
+              <SectionKicker align="left" tone="white">
+                Contact · Nationwide
+              </SectionKicker>
+            </motion.div>
+
             <motion.h1
               variants={fadeInUp}
-              className="text-3xl sm:text-5xl md:text-6xl font-bold text-white mb-6"
+              className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] text-white font-bold tracking-[-0.03em] leading-[0.98] mb-7"
             >
               {ts('contact.title')}
             </motion.h1>
-            <motion.p 
+
+            <motion.p
               variants={fadeInUp}
-              className="text-xl md:text-2xl text-gray-200 mb-8 max-w-4xl mx-auto"
+              className="text-lg md:text-xl text-white/65 font-light max-w-xl leading-relaxed mb-10"
             >
               {ts('contact.subtitle')}
             </motion.p>
+
+            <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-3">
+              <a
+                href="tel:+18883510782"
+                className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-white text-slate-950 text-sm font-semibold tracking-wide hover:bg-white/90 transition-colors"
+              >
+                Call (888) 351-0782
+                <svg
+                  className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  viewBox="0 0 24 24"
+                  aria-hidden
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+              </a>
+              <Link
+                href="/services"
+                className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/15 text-white text-sm font-medium hover:bg-white/[0.04] hover:border-white/30 transition-colors"
+              >
+                Explore services
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -184,7 +226,7 @@ export default function Contact() {
             whileInView="animate"
             viewport={{ once: true }}
             variants={fadeInLeft}
-            className="bg-white rounded-2xl shadow-lg shadow-blue-500/5 p-8"
+            className="bg-white shadow-lg shadow-blue-500/5 p-8"
           >
             <h2 className="text-3xl font-bold text-gray-900 mb-6 ">{ts('contact.sendMessage')}</h2>
             
@@ -195,7 +237,7 @@ export default function Contact() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="text-center py-8"
               >
-                <div className="text-6xl mb-4">✅</div>
+                <CheckCircle2 className="w-14 h-14 text-dpe-blue mx-auto mb-4" strokeWidth={1.5} />
                 <h3 className="text-2xl font-bold text-dpe-blue mb-2">{ts('contact.messageSent')}</h3>
                 <p className="text-gray-600">{ts('contact.messageSentDesc')}</p>
               </motion.div>
@@ -210,7 +252,7 @@ export default function Contact() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-dpe-blue focus:border-transparent ${
+                    className={`w-full px-4 py-3 border rounded-none text-gray-900 focus:outline-none focus:ring-2 focus:ring-dpe-blue focus:border-transparent ${
                       errors.name ? 'border-red-500' : 'border-gray-300'
                     }`}
                     placeholder={ts('contact.fullName')}
@@ -227,7 +269,7 @@ export default function Contact() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-dpe-blue focus:border-transparent ${
+                    className={`w-full px-4 py-3 border rounded-none text-gray-900 focus:outline-none focus:ring-2 focus:ring-dpe-blue focus:border-transparent ${
                       errors.email ? 'border-red-500' : 'border-gray-300'
                     }`}
                     placeholder={ts('contact.emailAddress')}
@@ -244,7 +286,7 @@ export default function Contact() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-dpe-blue focus:border-transparent ${
+                    className={`w-full px-4 py-3 border rounded-none text-gray-900 focus:outline-none focus:ring-2 focus:ring-dpe-blue focus:border-transparent ${
                       errors.phone ? 'border-red-500' : 'border-gray-300'
                     }`}
                     placeholder={ts('contact.phoneNumber')}
@@ -260,7 +302,7 @@ export default function Contact() {
                     name="loanType"
                     value={formData.loanType}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-dpe-blue focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-none text-gray-900 focus:outline-none focus:ring-2 focus:ring-dpe-blue focus:border-transparent"
                     aria-label={ts('contact.serviceInterest')}
                   >
                     <option value="">{ts('contact.serviceOptions.selectService')}</option>
@@ -283,7 +325,7 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     rows={4}
-                    className={`w-full px-4 py-3 border rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-dpe-blue focus:border-transparent resize-none ${
+                    className={`w-full px-4 py-3 border rounded-none text-gray-900 focus:outline-none focus:ring-2 focus:ring-dpe-blue focus:border-transparent resize-none ${
                       errors.message ? 'border-red-500' : 'border-gray-300'
                     }`}
                     placeholder={ts('contact.message')}
@@ -292,7 +334,7 @@ export default function Contact() {
                 </div>
 
                 {errors.submit && (
-                  <div role="alert" className="bg-red-50 border border-red-200 rounded-lg p-4">
+                  <div role="alert" className="bg-red-50 border border-red-200 p-4">
                     <p className="text-red-600">{errors.submit}</p>
                   </div>
                 )}
@@ -318,7 +360,7 @@ export default function Contact() {
             className="space-y-8"
           >
             {/* Business Hours */}
-            <div className="bg-white rounded-2xl shadow-lg shadow-blue-500/5 p-8">
+            <div className="bg-white shadow-lg shadow-blue-500/5 p-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">{ts('contact.businessHours')}</h3>
               <div className="space-y-3">
                 <div className="flex justify-between text-gray-600">
@@ -333,11 +375,11 @@ export default function Contact() {
             </div>
 
             {/* Contact Details */}
-            <div className="bg-white rounded-2xl shadow-lg shadow-blue-500/5 p-8">
+            <div className="bg-white shadow-lg shadow-blue-500/5 p-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">{ts('contact.getInTouch')}</h3>
               <div className="space-y-4">
                 <div className="flex items-center">
-                  <div className="text-dpe-blue text-xl mr-4">📞</div>
+                  <Phone className="w-5 h-5 text-dpe-blue mr-4 shrink-0" strokeWidth={1.5} />
                   <div>
                     <p className="text-gray-600 text-sm">{ts('contact.phone')}</p>
                     <a href="tel:+18883510782" className="text-gray-900 font-semibold hover:text-dpe-blue transition-colors">(888) 351-0782</a>
@@ -345,15 +387,15 @@ export default function Contact() {
                 </div>
 
                 <div className="flex items-center">
-                  <div className="text-dpe-blue text-xl mr-4">📧</div>
+                  <Mail className="w-5 h-5 text-dpe-blue mr-4 shrink-0" strokeWidth={1.5} />
                   <div>
                     <p className="text-gray-600 text-sm">{ts('contact.email')}</p>
                     <a href="mailto:support@drivepointexchange.com" className="text-gray-900 font-semibold hover:text-dpe-blue transition-colors">support@drivepointexchange.com</a>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center">
-                  <div className="text-dpe-blue text-xl mr-4">🌎</div>
+                  <Globe className="w-5 h-5 text-dpe-blue mr-4 shrink-0" strokeWidth={1.5} />
                   <div>
                     <p className="text-gray-600 text-sm">{ts('contact.address')}</p>
                     <p className="text-gray-900 font-semibold">Nationwide Service</p>
@@ -377,7 +419,7 @@ export default function Contact() {
           </motion.h2>
           <motion.div variants={staggerChildren} className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {(t('contact.faqItems') as Array<{question: string; answer: string}>).map((faq, index: number) => (
-              <motion.div key={index} variants={fadeInUp} className="bg-white rounded-2xl shadow-lg shadow-blue-500/5 p-6">
+              <motion.div key={index} variants={fadeInUp} className="bg-white shadow-lg shadow-blue-500/5 p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">{faq.question}</h3>
                 <p className="text-gray-600">
                   {faq.answer}

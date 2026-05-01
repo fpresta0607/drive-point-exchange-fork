@@ -55,7 +55,7 @@ function sanitizeHref(href: string): string {
 export const EMAIL_BRAND = {
   companyName: 'Drive Point Exchange.',
   siteUrl: getSiteUrl(),
-  logoUrl: `${getSiteUrl()}/logo.png`,
+  logoUrl: `${getSiteUrl()}/logo-no%20bg.png`,
   supportPhone: '(888) 351-0782',
   supportPhoneHref: 'tel:+18883510782',
   supportEmail: 'support@drivepointexchange.com',
@@ -63,7 +63,7 @@ export const EMAIL_BRAND = {
   colors: {
     navy: '#0E1A56',
     navyDeep: '#060C38',
-    blue: '#1934B5',
+    blue: '#0E1A56',
     blueLight: '#4A6FE0',
     green: '#2DB843',
     greenLight: '#78df92',
@@ -226,7 +226,7 @@ export function renderEmailLayout({
     }
 
     .section-brand {
-      background: linear-gradient(180deg, rgba(13, 27, 74, 0.04) 0%, rgba(25, 52, 181, 0.10) 100%);
+      background: linear-gradient(180deg, rgba(14, 26, 86, 0.04) 0%, rgba(14, 26, 86, 0.10) 100%);
       border-color: #c7d2f8;
     }
 

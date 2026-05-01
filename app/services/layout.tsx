@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description: "Comprehensive auto financing services including auto loan refinancing and vehicle coverage.",
     images: [
       {
-        url: "/auto/car-loan.jpg",
+        url: "/auto/hero-auto-refinance-v2.webp",
         width: 1200,
         height: 630,
         alt: "Professional financial services",

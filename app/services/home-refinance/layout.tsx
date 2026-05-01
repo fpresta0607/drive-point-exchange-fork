@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: "Home Refinance - Lower Mortgage Payments & Access Equity | Drive Point Exchange",
     description:
       "Refinance your home with Drive Point Exchange. Drop PMI, cash-out refinancing, debt consolidation, and flexible fixed-rate terms.",
-    images: [{ url: "/auto/svc-home-refinance.jpg", width: 1200, height: 630, alt: "Home refinancing consultation" }],
+    images: [{ url: "/auto/hero-home-refinance-v2.webp", width: 1200, height: 630, alt: "Home refinancing consultation" }],
   },
   twitter: {
     title: "Home Refinance - Lower Mortgage Payments & Access Equity",

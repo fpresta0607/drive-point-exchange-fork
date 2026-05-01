@@ -204,29 +204,32 @@ export function AutoLoanRefinanceCalculator() {
         calculatorType="auto"
       />
 
-      <div className="mx-auto w-full max-w-7xl">
+      <div className="mx-auto w-full max-w-7xl min-w-0">
         {/* Header Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between bg-white/95 backdrop-blur-xl rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.05)] border border-white/60 p-6 md:px-10 z-10 relative">
-          <div className="text-center sm:text-left mb-4 sm:mb-0">
-            <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/95 backdrop-blur-xl shadow-[0_-10px_40px_rgba(0,0,0,0.05)] border border-slate-200/80 p-5 sm:p-6 md:px-10 z-10 relative">
+          <div className="text-center sm:text-left min-w-0">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900">
               Calculate Your Payment
             </h2>
             <p className="mt-1 text-sm text-slate-500 font-medium">
               Get an instant estimate for your auto loan
             </p>
           </div>
-          <button
-            onClick={() => setShowQuoteForm(true)}
-            className="hidden sm:block green-cta-pulse h-12 md:h-14 rounded-full text-white font-bold px-8 text-base md:text-lg whitespace-nowrap shadow-lg"
-          >
-            Get My Refinance Quote
-          </button>
+          <div className="hidden sm:flex shrink-0">
+            <button
+              type="button"
+              onClick={() => setShowQuoteForm(true)}
+              className="glow-cta h-12 md:h-14 text-white font-bold px-6 lg:px-8 text-sm md:text-base lg:text-lg whitespace-nowrap shadow-lg"
+            >
+              Get My Refinance Quote
+            </button>
+          </div>
         </div>
 
         {/* Sliders and output body */}
-        <div className="bg-white/85 backdrop-blur-xl rounded-b-3xl shadow-2xl border border-white/60 border-t-0 p-6 sm:p-10 relative z-0">
-          <div className="grid gap-6 lg:gap-10 lg:grid-cols-[1fr_minmax(280px,0.8fr)] auto-rows-max lg:auto-rows-fr">
-            <div className="flex flex-col bg-transparent h-full">
+        <div className="bg-white/85 backdrop-blur-xl shadow-2xl border border-slate-200/80 border-t-0 p-4 sm:p-6 lg:p-10 relative z-0">
+          <div className="grid gap-6 lg:gap-8 xl:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(240px,340px)] auto-rows-max lg:auto-rows-fr">
+            <div className="flex flex-col bg-transparent h-full min-w-0">
               {isMobile ? (
                 /* ── Mobile: horizontal sliders stacked vertically ── */
                 <div className="flex flex-col gap-5 w-full py-2">
@@ -236,7 +239,7 @@ export function AutoLoanRefinanceCalculator() {
                         <Label htmlFor={`calc-${cfg.key}`} className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">
                           {cfg.label.join(" ")}
                         </Label>
-                        <div className="flex items-center justify-center gap-1 px-3 py-1.5 border-2 border-slate-300 hover:border-slate-400 focus-within:border-slate-600 rounded-lg bg-white/50 transition-colors">
+                        <div className="flex items-center justify-center gap-1 px-3 py-1.5 border-2 border-slate-300 hover:border-dpe-navy/60 focus-within:border-dpe-navy bg-white/50 transition-colors">
                           {cfg.prefix && <span className="text-sm font-extrabold text-slate-800">{cfg.prefix}</span>}
                           <input
                             id={`calc-${cfg.key}`}
@@ -268,9 +271,9 @@ export function AutoLoanRefinanceCalculator() {
                 </div>
               ) : (
                 /* ── Desktop: vertical sliders side by side ── */
-                <div className="flex flex-1 min-h-0 justify-center gap-6 md:gap-10 lg:gap-14 w-full mt-2 mb-2">
+                <div className="flex flex-1 min-h-0 justify-center gap-3 md:gap-5 lg:gap-8 xl:gap-10 w-full mt-2 mb-2">
                   {sliderConfigs.map((cfg) => (
-                    <div key={cfg.key} className="flex flex-col items-center gap-3 h-full">
+                    <div key={cfg.key} className="flex flex-col items-center gap-3 h-full min-w-0 flex-1">
                       <Slider
                         value={[values[cfg.key]]}
                         min={cfg.min}
@@ -284,7 +287,7 @@ export function AutoLoanRefinanceCalculator() {
                         tooltipContent={cfg.tooltipFormat}
                       />
                       <div className="flex flex-col items-center h-20 justify-start">
-                        <div className="flex items-center justify-center gap-1 px-3 py-1.5 border-2 border-slate-300 hover:border-slate-400 focus-within:border-slate-600 rounded-lg bg-white/50 transition-colors">
+                        <div className="flex items-center justify-center gap-1 px-3 py-1.5 border-2 border-slate-300 hover:border-dpe-navy/60 focus-within:border-dpe-navy bg-white/50 transition-colors">
                           {cfg.prefix && <span className="text-xs sm:text-sm font-extrabold text-slate-800">{cfg.prefix}</span>}
                           <input
                             id={`calc-desktop-${cfg.key}`}
@@ -308,44 +311,47 @@ export function AutoLoanRefinanceCalculator() {
               )}
             </div>
 
-            <div className="flex flex-col justify-center gap-4 lg:pl-6 lg:border-l lg:border-slate-200 h-full">
-              <Card className="rounded-2xl border border-slate-200 bg-white shadow-sm flex flex-col justify-center">
-                <CardContent className="space-y-4 lg:space-y-6 pt-6 pb-6 px-4 lg:p-8 text-center">
+            <div className="flex flex-col justify-center gap-4 lg:pl-6 lg:border-l lg:border-slate-200 h-full min-w-0">
+              <Card className="rounded-none border border-slate-200 bg-white shadow-sm flex flex-col justify-center">
+                <CardContent className="space-y-4 lg:space-y-6 pt-6 pb-6 px-4 lg:p-6 xl:p-8 text-center">
                   <div>
-                    <p className="text-sm lg:text-lg font-semibold text-slate-600">
+                    <p className="text-sm lg:text-base font-semibold text-slate-600">
                       New Monthly Payment
                     </p>
-                    <p className="mt-1 lg:mt-2 text-4xl lg:text-5xl font-extrabold tracking-tight text-blue-700 whitespace-nowrap">
+                    <p className="mt-1 lg:mt-2 text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-extrabold tracking-tight text-slate-900 whitespace-nowrap">
                       ${formatNumberWithCommas(results.estimatedNewPayment, 2)}
                     </p>
                   </div>
 
                   <div className="border-t border-slate-100 pt-4 lg:pt-6">
-                    <p className="text-sm lg:text-lg text-slate-500">Monthly savings</p>
-                    <p className={`mt-1 lg:mt-2 text-2xl lg:text-3xl font-bold whitespace-nowrap ${results.monthlySavings >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
+                    <p className="text-sm lg:text-base text-slate-500">Monthly savings</p>
+                    <p className={`mt-1 lg:mt-2 text-2xl lg:text-2xl xl:text-3xl font-bold whitespace-nowrap ${results.monthlySavings >= 0 ? 'text-dpe-green' : 'text-red-500'}`}>
                       ${formatNumberWithCommas(results.monthlySavings, 2)}
                     </p>
                   </div>
 
                   <div className="border-t border-slate-100 pt-4 lg:pt-6">
-                    <p className="text-sm lg:text-lg text-slate-500">Interest savings</p>
-                    <p className={`mt-1 lg:mt-2 text-2xl lg:text-3xl font-bold whitespace-nowrap ${results.interestSavings >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
+                    <p className="text-sm lg:text-base text-slate-500">Interest savings</p>
+                    <p className={`mt-1 lg:mt-2 text-2xl lg:text-2xl xl:text-3xl font-bold whitespace-nowrap ${results.interestSavings >= 0 ? 'text-dpe-green' : 'text-red-500'}`}>
                       {results.interestSavings >= 0 ? '+' : ''} ${formatNumberWithCommas(Math.abs(results.interestSavings), 2)}
                     </p>
                   </div>
                 </CardContent>
               </Card>
 
-              <button
-                onClick={() => setShowQuoteForm(true)}
-                className="sm:hidden green-cta-pulse h-12 rounded-full text-white font-bold px-8 text-base whitespace-nowrap shadow-lg w-full"
-              >
-                Get My Refinance Quote
-              </button>
+              <div className="sm:hidden w-full">
+                <button
+                  type="button"
+                  onClick={() => setShowQuoteForm(true)}
+                  className="glow-cta h-12 text-white font-bold px-8 text-base whitespace-nowrap shadow-lg w-full"
+                >
+                  Get My Refinance Quote
+                </button>
+              </div>
               <Button
                 variant="secondary"
                 onClick={resetCalculator}
-                className="h-12 lg:h-14 rounded-full bg-slate-100/50 text-base font-semibold text-slate-600 hover:bg-slate-200 w-full transition-transform hover:-translate-y-0.5"
+                className="h-12 lg:h-14 rounded-none bg-slate-100/50 text-base font-semibold text-slate-600 hover:bg-slate-200 w-full transition-transform hover:-translate-y-0.5"
               >
                 <RotateCcw className="mr-2 h-4 w-4" />
                 Reset Calculator

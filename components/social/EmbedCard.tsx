@@ -104,7 +104,7 @@ function TikTokEmbed({ videoId, caption, url }: { videoId: string; caption: stri
 
   return (
     <div className="h-full">
-      <div className="rounded-2xl overflow-hidden shadow-lg bg-black h-full">
+      <div className="overflow-hidden shadow-lg bg-black h-full border border-slate-200/40">
         <iframe
           src={`https://www.tiktok.com/player/v1/${videoId}?music_info=1&description=0`}
           className="w-full h-full"
@@ -157,7 +157,7 @@ function YouTubeEmbed({ videoId, caption, url }: { videoId: string; caption: str
 
   return (
     <div className="h-full">
-      <div className="rounded-2xl overflow-hidden shadow-lg bg-black h-full">
+      <div className="overflow-hidden shadow-lg bg-black h-full border border-slate-200/40">
         <iframe
           src={`https://www.youtube-nocookie.com/embed/${videoId}`}
           className="w-full h-full"
@@ -246,7 +246,7 @@ function OEmbedCard({ post }: { post: SocialPost }) {
   return (
     <div ref={containerRef} className="w-full">
       {!isLoaded && (
-        <div className="animate-pulse bg-gray-100 rounded-2xl min-h-[400px] flex items-center justify-center">
+        <div className="animate-pulse bg-gray-100 min-h-[400px] flex items-center justify-center border border-slate-200">
           <div className="text-center">
             <div
               className="w-10 h-10 rounded-full mx-auto mb-3"
@@ -277,7 +277,7 @@ function FallbackCard({ post }: { post: SocialPost }) {
       href={post.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="block w-full bg-white/70 backdrop-blur-md border border-white/40 rounded-xl p-8 text-center hover:bg-white/90 hover:shadow-xl transition-all duration-200"
+      className="block w-full bg-white/70 backdrop-blur-md border border-white/40 p-8 text-center hover:bg-white/90 hover:shadow-xl transition-all duration-200"
     >
       <div
         className="w-12 h-12 rounded-full mx-auto mb-4"
