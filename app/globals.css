@@ -365,6 +365,34 @@ input[type="range"]::-moz-range-thumb {
   100% { background-position: 0% 50%; }
 }
 
+/* Green-leaning gradient text fill — used on hero headline accent */
+.text-green-sweep {
+  background-image: linear-gradient(
+    90deg,
+    #2DB843 0%,
+    #6ee391 25%,
+    #ffffff 50%,
+    #6ee391 75%,
+    #2DB843 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.animate-gradient-text-sweep {
+  animation: green-gradient-sweep 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-gradient-text-sweep {
+    animation: none;
+  }
+}
+
 /* Electrified CTA button — slate-900 fill, flowing green border + glow */
 .glow-cta {
   --_border: 2px;

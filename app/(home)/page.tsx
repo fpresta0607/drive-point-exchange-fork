@@ -9,6 +9,7 @@ import Navigation from '../../components/Navigation';
 import Footer from '../../components/Footer';
 import { useI18n } from '../../lib/i18n/context';
 import { SectionKicker } from '../../components/ui/section-kicker';
+import { WordRotate } from '../../components/ui/word-rotate';
 
 const AutoLoanRefinanceCalculator = dynamic(
   () => import('../../components/ui/auto-loan-refinance-calculator').then(m => m.AutoLoanRefinanceCalculator),
@@ -155,16 +156,28 @@ export default function Home() {
               className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] text-white leading-[0.98] font-heading font-bold tracking-[-0.03em] mb-7"
             >
               Your roadmap to<br />
-              financial freedom.
+              <span className="text-green-sweep animate-gradient-text-sweep">
+                financial freedom.
+              </span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="text-lg md:text-xl text-white/65 font-light max-w-xl mb-10 leading-relaxed"
+              className="text-lg md:text-xl max-w-xl mb-10 leading-relaxed"
             >
-              Lower your payments, protect your vehicle, and build a stronger financial future — with experts who put you first.
+              <WordRotate
+                words={[
+                  'Lower your payments.',
+                  'Protect your vehicle.',
+                  'Build a stronger financial future.',
+                ]}
+                className="block text-white font-medium"
+              />
+              <span className="block text-white/55 font-light mt-1">
+                With experts who put you first.
+              </span>
             </motion.p>
 
             <motion.div
@@ -213,7 +226,7 @@ export default function Home() {
       </section>
 
       {/* ─── SERVICES TABS ─── editorial dark band, sharp panels */}
-      <section className="bg-[#01040E] overflow-hidden border-t border-white/[0.06]">
+      <section className="bg-slate-950 overflow-hidden border-t border-white/[0.06]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20">
 
           {/* Header — left-aligned, restrained */}
@@ -356,7 +369,7 @@ export default function Home() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.4 }}
-          className="group block w-full bg-[#01040E] border-t border-white/[0.08] hover:bg-[#05091a] transition-colors"
+          className="group block w-full bg-slate-950 border-t border-white/[0.08] hover:bg-slate-900 transition-colors"
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-8">
             {/* Left: Excellent + stars */}
