@@ -1,26 +1,16 @@
 "use client";
 
 import * as React from "react";
-import { useMemo, useState, useSyncExternalStore } from "react";
+import { useMemo, useState } from "react";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { RotateCcw } from "lucide-react";
 import dynamic from "next/dynamic";
+import { useIsMobile } from "@/hooks/use-is-mobile";
 
 const EmailModal = dynamic(() => import("@/components/calculator/EmailModal"), { ssr: false });
-
-function useIsMobile(breakpoint = 768) {
-  return useSyncExternalStore(
-    (callback) => {
-      window.addEventListener("resize", callback);
-      return () => window.removeEventListener("resize", callback);
-    },
-    () => window.innerWidth < breakpoint,
-    () => false,
-  );
-}
 
 type LoanInputs = {
   currentMonthlyPayment: number;
@@ -318,14 +308,14 @@ export function AutoLoanRefinanceCalculator() {
                     <p className="text-sm lg:text-base font-semibold text-slate-600">
                       New Monthly Payment
                     </p>
-                    <p className="mt-1 lg:mt-2 text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-extrabold tracking-tight text-slate-900 whitespace-nowrap">
+                    <p className="mt-1 lg:mt-2 text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-extrabold tracking-tight text-slate-900 break-words sm:whitespace-nowrap">
                       ${formatNumberWithCommas(results.estimatedNewPayment, 2)}
                     </p>
                   </div>
 
                   <div className="border-t border-slate-100 pt-4 lg:pt-6">
                     <p className="text-sm lg:text-base text-slate-500">Monthly savings</p>
-                    <p className={`mt-1 lg:mt-2 text-2xl lg:text-2xl xl:text-3xl font-bold whitespace-nowrap ${results.monthlySavings >= 0 ? 'text-dpe-green' : 'text-red-500'}`}>
+                    <p className={`mt-1 lg:mt-2 text-2xl lg:text-2xl xl:text-3xl font-bold break-words sm:whitespace-nowrap ${results.monthlySavings >= 0 ? 'text-dpe-green' : 'text-red-500'}`}>
                       ${formatNumberWithCommas(results.monthlySavings, 2)}
                     </p>
                   </div>

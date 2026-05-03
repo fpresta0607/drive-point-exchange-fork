@@ -41,11 +41,12 @@ export default function Footer() {
           <div className="flex flex-row items-center gap-8 shrink-0">
             <Link href="/" className="inline-flex items-center shrink-0">
               <Image
-                src="/logo-no bg-inverted.png"
+                src="/logo-no-bg-inverted.webp"
                 alt="Drive Point Exchange Logo"
                 width={300}
                 height={110}
                 className="h-24 w-auto"
+                loading="lazy"
               />
             </Link>
             <div>

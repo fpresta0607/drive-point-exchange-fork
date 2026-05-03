@@ -74,7 +74,14 @@ export default function ServiceLayout({ title, description, features, imageSrc, 
             <div className="flex flex-col">
               {imageSrc && (
                 <motion.div variants={fadeIn} className="relative h-48 w-full overflow-hidden mb-4 border border-slate-200">
-                  <Image src={imageSrc} alt={title} fill className="object-cover" />
+                  <Image
+                    src={imageSrc}
+                    alt={title}
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-cover"
+                    loading="lazy"
+                  />
                 </motion.div>
               )}
               <motion.h2 variants={fadeIn} className="text-sm font-semibold uppercase tracking-widest text-dpe-green mb-3">

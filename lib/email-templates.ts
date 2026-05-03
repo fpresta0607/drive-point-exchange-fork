@@ -55,23 +55,24 @@ function sanitizeHref(href: string): string {
 export const EMAIL_BRAND = {
   companyName: 'Drive Point Exchange.',
   siteUrl: getSiteUrl(),
-  logoUrl: `${getSiteUrl()}/logo-no%20bg.png`,
+  logoUrl: `${getSiteUrl()}/logo-no-bg-inverted.webp`,
   supportPhone: '(888) 351-0782',
   supportPhoneHref: 'tel:+18883510782',
   supportEmail: 'support@drivepointexchange.com',
   supportEmailHref: 'mailto:support@drivepointexchange.com',
   colors: {
-    navy: '#0E1A56',
-    navyDeep: '#060C38',
-    blue: '#0E1A56',
-    blueLight: '#4A6FE0',
+    slate950: '#020617',
+    slate900: '#0f172a',
+    slate800: '#1e293b',
+    slate300: '#cbd5e1',
     green: '#2DB843',
     greenLight: '#78df92',
+    greenSoft: '#e8f7ec',
     slate: '#64748b',
     bg: '#f8fafc',
-    bgAlt: '#e8f4ec',
-    border: '#d9e3ef',
-    text: '#060C38',
+    bgAlt: '#eef5f0',
+    border: '#dbe7df',
+    text: '#0f172a',
     textSoft: '#334155',
   },
 } as const;
@@ -145,7 +146,7 @@ export function renderEmailLayout({
     }
 
     a {
-      color: ${EMAIL_BRAND.colors.blue};
+      color: ${EMAIL_BRAND.colors.green};
       text-decoration: none;
     }
 
@@ -161,22 +162,18 @@ export function renderEmailLayout({
       border: 1px solid ${EMAIL_BRAND.colors.border};
       border-radius: 28px;
       overflow: hidden;
-      box-shadow: 0 24px 64px rgba(6, 15, 46, 0.12);
+      box-shadow: 0 24px 64px rgba(15, 23, 42, 0.12);
     }
 
     .hero {
       padding: 32px 28px;
       text-align: center;
-      background: linear-gradient(135deg, ${EMAIL_BRAND.colors.navyDeep} 0%, ${EMAIL_BRAND.colors.navy} 58%, ${EMAIL_BRAND.colors.blue} 100%);
+      background: linear-gradient(135deg, ${EMAIL_BRAND.colors.slate950} 0%, ${EMAIL_BRAND.colors.slate900} 100%);
     }
 
     .logo-wrap {
       display: inline-block;
       margin: 0 auto 22px;
-      padding: 16px 20px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.96);
-      box-shadow: 0 12px 30px rgba(6, 15, 46, 0.18);
     }
 
     .logo {
@@ -197,7 +194,7 @@ export function renderEmailLayout({
     .subtitle {
       margin: 12px auto 0;
       max-width: 520px;
-      color: #c7d2f8;
+      color: ${EMAIL_BRAND.colors.slate300};
       font-size: 15px;
       line-height: 1.6;
     }
@@ -226,8 +223,8 @@ export function renderEmailLayout({
     }
 
     .section-brand {
-      background: linear-gradient(180deg, rgba(14, 26, 86, 0.04) 0%, rgba(14, 26, 86, 0.10) 100%);
-      border-color: #c7d2f8;
+      background: linear-gradient(180deg, rgba(45, 184, 67, 0.05) 0%, rgba(45, 184, 67, 0.10) 100%);
+      border-color: rgba(45, 184, 67, 0.30);
     }
 
     .section-alert {
@@ -238,7 +235,7 @@ export function renderEmailLayout({
     .section-title {
       margin: 0 0 16px;
       padding-bottom: 10px;
-      border-bottom: 2px solid ${EMAIL_BRAND.colors.blue};
+      border-bottom: 2px solid ${EMAIL_BRAND.colors.green};
       color: ${EMAIL_BRAND.colors.text};
       font-size: 18px;
       font-weight: 700;
@@ -275,7 +272,7 @@ export function renderEmailLayout({
     }
 
     .value-accent {
-      color: ${EMAIL_BRAND.colors.blue};
+      color: ${EMAIL_BRAND.colors.green};
     }
 
     .message {
@@ -309,14 +306,14 @@ export function renderEmailLayout({
     }
 
     .highlight-brand {
-      background: linear-gradient(135deg, ${EMAIL_BRAND.colors.navyDeep} 0%, ${EMAIL_BRAND.colors.navy} 55%, ${EMAIL_BRAND.colors.blue} 100%);
+      background: linear-gradient(135deg, ${EMAIL_BRAND.colors.slate950} 0%, ${EMAIL_BRAND.colors.slate800} 100%);
       color: #ffffff;
-      box-shadow: 0 18px 36px rgba(13, 27, 74, 0.18);
+      box-shadow: 0 18px 36px rgba(15, 23, 42, 0.22);
     }
 
     .highlight-neutral {
-      background: #eef1fd;
-      border: 1px solid #c7d2f8;
+      background: ${EMAIL_BRAND.colors.greenSoft};
+      border: 1px solid rgba(45, 184, 67, 0.25);
       color: ${EMAIL_BRAND.colors.text};
     }
 
@@ -387,7 +384,7 @@ export function renderEmailLayout({
     }
 
     .footer-meta a {
-      color: ${EMAIL_BRAND.colors.blue};
+      color: ${EMAIL_BRAND.colors.green};
     }
 
     @media only screen and (max-width: 640px) {

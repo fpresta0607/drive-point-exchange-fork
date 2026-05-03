@@ -188,7 +188,7 @@ export default function Benefits() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-60px' }}
                   transition={{ duration: 0.4, delay: (index % 2) * 0.05 }}
-                  className="bg-white p-8 md:p-10 flex flex-col gap-6"
+                  className="bg-white p-6 sm:p-8 md:p-10 flex flex-col gap-6"
                 >
                   <div className="relative aspect-[16/9] w-full overflow-hidden border border-slate-200/70">
                     <Image
@@ -197,6 +197,7 @@ export default function Benefits() {
                       fill
                       sizes="(min-width: 768px) 50vw, 100vw"
                       className={`object-cover ${index === 2 ? 'scale-125' : ''}`}
+                      loading="lazy"
                     />
                     <div className="absolute top-3 left-3 inline-flex items-center gap-2 bg-slate-950/85 backdrop-blur-sm px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white">
                       <span aria-hidden className="block w-0.5 h-3 bg-dpe-green" />

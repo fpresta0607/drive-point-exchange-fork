@@ -149,8 +149,8 @@ export default function HomeLoanCalculator() {
   ];
 
   return (
-    <div className="bg-white shadow-2xl p-8 border border-dpe-gray-100">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="bg-white shadow-2xl p-4 sm:p-6 lg:p-8 border border-dpe-gray-100">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
         {/* Left Column - Inputs */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -158,7 +158,7 @@ export default function HomeLoanCalculator() {
           transition={{ duration: 0.6 }}
           className="space-y-6"
         >
-          <h3 className="text-2xl font-bold text-dpe-gray-900 mb-6">{ts('homeLoanCalculator.loanDetails')}</h3>
+          <h3 className="text-xl sm:text-2xl font-bold text-dpe-gray-900 mb-6">{ts('homeLoanCalculator.loanDetails')}</h3>
           
           {/* Home Price */}
           <div>
@@ -248,9 +248,9 @@ export default function HomeLoanCalculator() {
           <h3 className="text-2xl font-bold text-dpe-gray-900 mb-6">{ts('homeLoanCalculator.paymentBreakdownTitle')}</h3>
           
           {/* Monthly Payment */}
-          <div className="bg-gradient-to-br from-dpe-navy to-dpe-navy-deep p-6 text-white">
+          <div className="bg-dpe-green p-6 text-white">
             <div className="text-center">
-              <p className="text-dpe-blue-100 text-sm font-medium mb-2">{ts('homeLoanCalculator.estimatedMonthlyPayment')}</p>
+              <p className="text-white/80 text-sm font-medium mb-2">{ts('homeLoanCalculator.estimatedMonthlyPayment')}</p>
               <p className="text-4xl font-bold">${Math.round(monthlyPayment).toLocaleString()}</p>
             </div>
           </div>

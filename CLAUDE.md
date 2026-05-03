@@ -38,6 +38,8 @@ components/
   calculator/              # Calculator sub-components (EmailModal)
   admin/                   # Admin panel components
   social/                  # Social embed components
+hooks/
+  use-is-mobile.ts         # Shared `<768px` viewport detector via useSyncExternalStore
 lib/
   supabase.ts              # Supabase clients (browser, service, server)
   structured-data.ts       # JSON-LD schema generators
@@ -74,7 +76,7 @@ npm run list-admins      # List admin users
 ## Key Architecture Patterns
 
 - **Dynamic imports**: Calculator, shader backgrounds, TrustpilotReviews, and SocialFeed are dynamically imported with `ssr: false` for bundle splitting
-- **WebGL shaders**: Lightning and nebula backgrounds use IntersectionObserver to pause when off-screen, `requestAnimationFrame` throttled to 30fps
+- **WebGL shaders**: Lightning and nebula backgrounds use IntersectionObserver to pause when off-screen, `requestAnimationFrame` throttled to 30fps. On mobile (`<768px` via `useIsMobile`) the canvas is skipped and a CSS gradient renders instead — saves GPU on phones.
 - **Structured data**: Organization schema in root layout; per-service breadcrumb + service schemas in service layouts; FAQ schema on contact page
 - **Supabase clients**: `createBrowserClient()` for public reads, `createServiceClient()` for admin-only operations (never on public endpoints), `createServerSupabaseClient()` for cookie-based auth
 - **Email**: Resend primary with Gmail SMTP fallback via nodemailer

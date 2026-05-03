@@ -409,7 +409,7 @@ export default function LoanCalculator() {
             />
 
             {/* Interest Rates - Side by Side */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Current APR */}
               <div>
                 <label className="block text-sm font-medium text-dpe-gray-700 mb-2">
@@ -464,7 +464,7 @@ export default function LoanCalculator() {
             </div>
 
             {/* Loan Terms - Side by Side */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Remaining Term */}
               <div>
                 <label className="block text-sm font-medium text-dpe-gray-700 mb-2">
@@ -518,7 +518,7 @@ export default function LoanCalculator() {
           {/* Right Column - Output Section */}
           <div className="lg:pl-6 lg:border-l lg:border-dpe-gray-200" aria-live="polite">
             {/* Main Result Card */}
-            <div className="bg-dpe-gray-50 p-6 border border-dpe-blue-800/30">
+            <div className="bg-dpe-gray-50 p-4 sm:p-6 border border-dpe-blue-800/30">
               <div className="text-center mb-4">
                 <div className="text-sm font-medium text-dpe-gray-600 mb-2">{ts('calculator.newMonthlyPayment')}</div>
                 <div className="text-4xl font-bold text-dpe-blue">

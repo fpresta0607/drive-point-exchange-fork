@@ -192,7 +192,7 @@ export default function EmailModal({
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="firstName" className="block text-sm font-medium text-dpe-gray-700 mb-2">
                 First Name *
@@ -319,7 +319,7 @@ export default function EmailModal({
             </div>
           )}
 
-          <div className="flex gap-3 pt-2">
+          <div className="flex flex-col-reverse sm:flex-row gap-2 sm:gap-3 pt-2">
             <button
               type="button"
               onClick={onClose}

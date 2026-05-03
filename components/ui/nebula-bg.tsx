@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
+import { useIsMobile } from '@/hooks/use-is-mobile';
 
 const FRAME_INTERVAL = 1000 / 30;
 
@@ -63,6 +64,7 @@ export function NebulaBg({ className = '' }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const el = containerRef.current;
@@ -76,7 +78,7 @@ export function NebulaBg({ className = '' }: { className?: string }) {
   }, []);
 
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible || isMobile) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -143,15 +145,21 @@ export function NebulaBg({ className = '' }: { className?: string }) {
       cancelAnimationFrame(animId);
       gl.deleteProgram(program);
     };
-  }, [isVisible]);
+  }, [isVisible, isMobile]);
 
   return (
-    <div ref={containerRef} className={`absolute inset-0 w-full h-full ${className}`}>
-      {isVisible && (
+    <div
+      ref={containerRef}
+      className={`absolute inset-0 w-full h-full ${className}`}
+      style={{
+        background:
+          'radial-gradient(ellipse at 30% 20%, rgba(25,52,181,0.35) 0%, rgba(45,184,67,0.10) 50%, rgba(0,0,0,1) 100%)',
+      }}
+    >
+      {!isMobile && isVisible && (
         <canvas
           ref={canvasRef}
           className="absolute inset-0 w-full h-full touch-none"
-          style={{ background: 'black' }}
         />
       )}
     </div>

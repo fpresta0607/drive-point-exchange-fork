@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import { motion, type MotionProps } from "framer-motion";
+import { motion, useReducedMotion, type MotionProps } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 
@@ -17,6 +17,7 @@ function GradientText({
   children,
   ...props
 }: GradientTextProps) {
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <MotionSpan
@@ -24,7 +25,7 @@ function GradientText({
         "relative inline-block",
         className,
       )}
-      animate={{
+      animate={prefersReducedMotion ? {} : {
         textShadow: [
           "0 0 20px rgba(25,52,181,0.4), 0 0 40px rgba(100,160,255,0.2), 0 0 80px rgba(25,52,181,0.1)",
           "0 0 35px rgba(140,190,255,0.5), 0 0 70px rgba(25,52,181,0.4), 0 0 120px rgba(100,160,255,0.15)",
@@ -36,7 +37,7 @@ function GradientText({
           "brightness(1)",
         ],
       }}
-      transition={{
+      transition={prefersReducedMotion ? { duration: 0 } : {
         duration: 4,
         repeat: Infinity,
         ease: "easeInOut",

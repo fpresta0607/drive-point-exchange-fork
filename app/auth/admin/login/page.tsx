@@ -85,7 +85,7 @@ function AdminLoginForm() {
           variants={fadeInUp}
           className="text-center"
         >
-          <h2 className="mt-6 text-3xl font-bold text-gray-900">
+          <h2 className="mt-6 text-2xl sm:text-3xl font-bold text-gray-900">
             Admin Login
           </h2>
           <p className="mt-2 text-sm text-gray-600">

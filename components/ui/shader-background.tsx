@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { useIsMobile } from '@/hooks/use-is-mobile';
 
 const FRAME_INTERVAL = 1000 / 30;
 
@@ -8,6 +9,7 @@ const ShaderBackground = ({ className = "fixed top-0 left-0 w-full h-full -z-10"
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const isMobile = useIsMobile();
 
   const vsSource = `
     attribute vec4 aVertexPosition;
@@ -156,7 +158,7 @@ const ShaderBackground = ({ className = "fixed top-0 left-0 w-full h-full -z-10"
   }, []);
 
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible || isMobile) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -227,11 +229,20 @@ const ShaderBackground = ({ className = "fixed top-0 left-0 w-full h-full -z-10"
       cancelAnimationFrame(animId);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isVisible]);
+  }, [isVisible, isMobile]);
 
   return (
-    <div ref={containerRef} className={className}>
-      {isVisible && <canvas ref={canvasRef} className="w-full h-full" />}
+    <div
+      ref={containerRef}
+      className={className}
+      style={{
+        background:
+          'linear-gradient(135deg, #01040E 0%, #0a1438 55%, #1934B5 110%)',
+      }}
+    >
+      {!isMobile && isVisible && (
+        <canvas ref={canvasRef} className="w-full h-full" />
+      )}
     </div>
   );
 };

@@ -32,9 +32,9 @@ export default function PriceSlider({
         step={step}
         value={value}
         onChange={handleChange}
-        className="w-full h-3 bg-dpe-gray-300 rounded-none appearance-none cursor-pointer slider focus:outline-none focus:ring-2 focus:ring-dpe-blue"
+        className="w-full h-3 bg-dpe-gray-300 rounded-none appearance-none cursor-pointer slider focus:outline-none focus:ring-2 focus:ring-dpe-green"
         style={{
-          background: `linear-gradient(to right, #0E1A56 0%, #0E1A56 ${((value - min) / (max - min)) * 100}%, #e5e7eb ${((value - min) / (max - min)) * 100}%, #e5e7eb 100%)`
+          background: `linear-gradient(to right, #2DB843 0%, #2DB843 ${((value - min) / (max - min)) * 100}%, #e5e7eb ${((value - min) / (max - min)) * 100}%, #e5e7eb 100%)`
         }}
         aria-label="Vehicle price slider"
       />

@@ -146,7 +146,7 @@ export default function Contact() {
       <section className="relative min-h-[75vh] flex items-end overflow-hidden pt-32 pb-20 bg-slate-950">
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
-            src="/auto/real-hero-v1.png"
+            src="/auto/real-hero-v1.webp"
             alt=""
             fill
             sizes="100vw"
@@ -226,9 +226,9 @@ export default function Contact() {
             whileInView="animate"
             viewport={{ once: true }}
             variants={fadeInLeft}
-            className="bg-white shadow-lg shadow-blue-500/5 p-8"
+            className="bg-white shadow-lg shadow-blue-500/5 p-4 sm:p-6 lg:p-8"
           >
-            <h2 className="text-3xl font-bold text-gray-900 mb-6 ">{ts('contact.sendMessage')}</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 ">{ts('contact.sendMessage')}</h2>
             
             {isSubmitted ? (
               <motion.div
@@ -360,8 +360,8 @@ export default function Contact() {
             className="space-y-8"
           >
             {/* Business Hours */}
-            <div className="bg-white shadow-lg shadow-blue-500/5 p-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">{ts('contact.businessHours')}</h3>
+            <div className="bg-white shadow-lg shadow-blue-500/5 p-4 sm:p-6 lg:p-8">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">{ts('contact.businessHours')}</h3>
               <div className="space-y-3">
                 <div className="flex justify-between text-gray-600">
                   <span>{ts('contact.mondaySaturday')}</span>
@@ -375,8 +375,8 @@ export default function Contact() {
             </div>
 
             {/* Contact Details */}
-            <div className="bg-white shadow-lg shadow-blue-500/5 p-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">{ts('contact.getInTouch')}</h3>
+            <div className="bg-white shadow-lg shadow-blue-500/5 p-4 sm:p-6 lg:p-8">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">{ts('contact.getInTouch')}</h3>
               <div className="space-y-4">
                 <div className="flex items-center">
                   <Phone className="w-5 h-5 text-dpe-blue mr-4 shrink-0" strokeWidth={1.5} />
@@ -414,10 +414,10 @@ export default function Contact() {
           variants={staggerChildren}
           className="mt-16"
         >
-          <motion.h2 variants={fadeInUp} className="text-3xl font-bold text-gray-900 text-center mb-12 ">
+          <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-12 ">
             {ts('contact.faq')}
           </motion.h2>
-          <motion.div variants={staggerChildren} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <motion.div variants={staggerChildren} className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
             {(t('contact.faqItems') as Array<{question: string; answer: string}>).map((faq, index: number) => (
               <motion.div key={index} variants={fadeInUp} className="bg-white shadow-lg shadow-blue-500/5 p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">{faq.question}</h3>

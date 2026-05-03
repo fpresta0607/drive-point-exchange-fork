@@ -132,7 +132,7 @@ export default function Navigation({ overlay = false }: { overlay?: boolean }) {
               <div className="relative h-20 w-[200px]">
                 <motion.div style={{ opacity: lightLogoOpacity }} className="absolute inset-0">
                   <Image
-                    src="/logo-no bg-inverted.png"
+                    src="/logo-no-bg-inverted.webp"
                     alt="Drive Point Exchange"
                     fill
                     sizes="200px"

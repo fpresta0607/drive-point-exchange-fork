@@ -1,5 +1,5 @@
 import * as React from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -25,6 +25,7 @@ export const SparksCarousel = React.forwardRef<
   SparksCarouselProps
 >(({ title, subtitle, items }, ref) => {
   const controls = useAnimation();
+  const prefersReducedMotion = useReducedMotion();
   const carouselRef = React.useRef<HTMLDivElement>(null);
   const [isAtStart, setIsAtStart] = React.useState(true);
   const [isAtEnd, setIsAtEnd] = React.useState(false);
@@ -91,9 +92,9 @@ export const SparksCarousel = React.forwardRef<
               <motion.div
                 key={item.id}
                 className="group w-[280px] flex-shrink-0 flex flex-col"
-                initial={{ opacity: 0, y: 12 }}
+                initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.04 }}
+                transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.3, delay: index * 0.04 }}
               >
                 <div 
                   className="overflow-hidden rounded-lg border bg-white text-gray-900 shadow-sm flex flex-col h-full"
@@ -106,6 +107,7 @@ export const SparksCarousel = React.forwardRef<
                         fill
                         src={item.imageSrc}
                         sizes="280px"
+                        loading="lazy"
                       />
                     </div>
                   </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
+import { useIsMobile } from '@/hooks/use-is-mobile';
 
 const FRAME_INTERVAL = 1000 / 30;
 
@@ -24,6 +25,7 @@ export function LightningBg({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const el = containerRef.current;
@@ -37,7 +39,7 @@ export function LightningBg({
   }, []);
 
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible || isMobile) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -204,11 +206,20 @@ export function LightningBg({
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationId);
     };
-  }, [isVisible, hue, xOffset, speed, intensity, size]);
+  }, [isVisible, isMobile, hue, xOffset, speed, intensity, size]);
 
   return (
-    <div ref={containerRef} className={`w-full h-full ${className}`}>
-      {isVisible && <canvas ref={canvasRef} className="w-full h-full" />}
+    <div
+      ref={containerRef}
+      className={`relative w-full h-full ${className}`}
+      style={{
+        background:
+          'radial-gradient(ellipse at 50% 40%, rgba(45,184,67,0.18) 0%, rgba(25,52,181,0.12) 45%, rgba(1,4,14,1) 100%)',
+      }}
+    >
+      {!isMobile && isVisible && (
+        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+      )}
     </div>
   );
 }

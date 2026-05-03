@@ -1,7 +1,7 @@
 'use client';
  
 import React, { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 export interface FilterConfig {
   key: string;
@@ -29,6 +29,7 @@ export default function LeadsTable({
   onExport,
   filters = []
 }: LeadsTableProps) {
+  const prefersReducedMotion = useReducedMotion();
   const [searchTerm, setSearchTerm] = useState('');
   const [sortField, setSortField] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
@@ -259,9 +260,9 @@ export default function LeadsTable({
             {sortedData.map((row, index) => (
               <motion.tr
                 key={String(row.id ?? index)}
-                initial={{ opacity: 0, y: 20 }}
+                initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2, delay: index * 0.05 }}
+                transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.2, delay: index * 0.05 }}
                 className="hover:bg-gray-50"
               >
                 {columns.map((column) => (
