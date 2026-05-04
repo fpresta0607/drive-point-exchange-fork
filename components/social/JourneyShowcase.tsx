@@ -10,7 +10,7 @@ import { TiktokIcon } from '@/components/ui/tiktok';
 import { YoutubeIcon } from '@/components/ui/youtube';
 import { SectionKicker } from '@/components/ui/section-kicker';
 
-const PLATFORM_ORDER: Platform[] = ['instagram', 'facebook', 'tiktok', 'youtube'];
+const PLATFORM_ORDER: Platform[] = ['tiktok', 'youtube', 'instagram', 'facebook'];
 
 const PROFILE_URLS: Record<Platform, string> = {
   instagram: 'https://www.instagram.com/drivepointexchange',
