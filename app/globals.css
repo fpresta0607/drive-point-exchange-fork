@@ -169,8 +169,8 @@ body {
 
 /* Logo dark variant — masked to footer navy (#070C2A) */
 .logo-mask-dark {
-  -webkit-mask-image: url('/logo-no%20bg.png');
-  mask-image: url('/logo-no%20bg.png');
+  -webkit-mask-image: url('/logo-no-bg.webp');
+  mask-image: url('/logo-no-bg.webp');
   -webkit-mask-size: contain;
   mask-size: contain;
   -webkit-mask-position: left center;
