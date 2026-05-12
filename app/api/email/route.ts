@@ -344,11 +344,16 @@ ${emailTranslations.contactForm.followUp}
       // Send notification to business owner
       const ownerHtmlMessage = renderEmailLayout({
         title: 'New Home Loan Estimate Request',
-        subtitle: 'Lead summary for Drive Point Exchange',
+        subtitle: homeIsAgent
+          ? 'Submitted by an agent on behalf of a client'
+          : 'Lead summary for Drive Point Exchange',
         sections: [
           renderEmailSection({
             title: 'Customer details',
             body: renderEmailRows([
+              ...(homeIsAgent
+                ? [{ label: 'Submitted by', value: 'Agent / authorized representative on behalf of a client', accent: true }]
+                : []),
               { label: 'Customer', value: `${firstName} ${lastName}`.trim() },
               { label: 'Email', value: email },
               { label: 'Phone', value: mobileNumber || 'Not provided' },
@@ -674,7 +679,7 @@ ${emailTranslations.refinanceEstimate.disclaimer}
     // Send notification to owner
     const ownerMessage = `
 🚗 NEW AUTO REFINANCE INQUIRY - DRIVE POINT EXCHANGE
-
+${isAgent ? '\n⚠️ SUBMITTED BY AN AGENT / AUTHORIZED REPRESENTATIVE ON BEHALF OF A CLIENT\n' : ''}
 CUSTOMER INFORMATION:
 • Name: ${name}
 • Email: ${email}
@@ -708,11 +713,16 @@ This customer has shown interest in auto refinancing and is ready to save money 
 
     const ownerHtmlMessage = renderEmailLayout({
       title: 'New Refinance Inquiry',
-      subtitle: `${name} submitted a refinance request`,
+      subtitle: isAgent
+        ? `Submitted by an agent on behalf of ${name}`
+        : `${name} submitted a refinance request`,
       sections: [
         renderEmailSection({
           title: 'Customer information',
           body: renderEmailRows([
+            ...(isAgent
+              ? [{ label: 'Submitted by', value: 'Agent / authorized representative on behalf of a client', accent: true }]
+              : []),
             { label: 'Name', value: name },
             { label: 'Email', value: email },
             { label: 'Phone', value: inputs.mobileNumber || 'Not provided' },
